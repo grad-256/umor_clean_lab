@@ -5,8 +5,6 @@ import Layout from '@/components/Layout'
 import Adsense from '@/components/Adsense'
 
 const Content = ({ content, contentList, params }) => {
-  console.log(content)
-
   return (
     <Layout title={`${content.title} | Skill Blog`} type="article">
       <div className={`${styles.c_article_main}`}>
