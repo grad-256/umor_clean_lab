@@ -17,6 +17,7 @@
 
   display: flex;
   margin: 0 auto;
+  align-items: flex-start;
 }
 
 .c_article_hero {
@@ -244,7 +245,7 @@
   }
 
   p {
-    @apply text-base mt-3;
+    @apply text-base mt-3 leading-7;
   }
 
   code {
