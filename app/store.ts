@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import sliceReducer from '@/features/Slice'
+import osakaCovidReducer from '@/features/osakaCovidSlice'
 
 export const store = configureStore({
   reducer: {
     sliceState: sliceReducer,
+    osakaCovidState: osakaCovidReducer,
   },
 })
 
