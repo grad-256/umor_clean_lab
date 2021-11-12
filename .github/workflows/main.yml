@@ -1,0 +1,41 @@
+name: After saving wordpress
+
+on:
+  repository_dispatch:
+    type: after_saving_wordpress
+
+env:
+  BASE: 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout "${{ env.BASE }}"
+        uses: actions/checkout@v2.3.2
+        with:
+          ref: '${{ env.BASE }}'
+
+      - name: Use Node.js 16.13.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.13.0'
+
+      - name: Build Site
+        run: |
+          npm install
+          npm run export
+      - name: List output files
+        run: ls -a
+
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@2.0.0
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          LOCAL_DIR: build/
+          REMOTE_DIR: ${{ secrets.PROD_REMOTE_DIR }}
+          ARGS: --parallel=20 --only-newer

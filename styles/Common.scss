@@ -1,0 +1,144 @@
+.c-wrapper {
+}
+
+// .l-inner {
+// }
+
+// main {
+// }
+
+header {
+  @media screen and (max-width: 1200px) {
+    @apply py-3;
+  }
+
+  @apply py-5;
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+footer {
+  @apply py-5 mt-20;
+  background-color: #fff;
+}
+
+.c_footer {
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    @apply px-3 flex-col;
+  }
+
+  @apply px-5 flex items-center justify-between;
+
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.c_footer_nav {
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    @apply justify-center flex-col items-center;
+  }
+
+  @apply flex;
+}
+
+.c_footer_nav_link {
+  @media screen and (max-width: 1200px) {
+    @apply mr-0;
+  }
+
+  @apply mr-3;
+
+  &:last-of-type {
+    @apply mr-0;
+  }
+}
+
+.c_footer_logo {
+  @media screen and (max-width: 1200px) {
+    @apply py-1 px-1 mb-2;
+  }
+
+  @apply py-1 px-2;
+  display: inline-block;
+  color: #fff;
+  background-color: #00aa6e;
+  border-radius: 10px;
+}
+
+main {
+}
+
+body .c-wrapper {
+  @media screen and (min-width: 1200px) {
+    height: 100vh !important;
+  }
+
+  display: flex;
+}
+
+.c-page {
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    padding: 8rem 0.5rem 2rem;
+  }
+
+  // height: 100vh;
+  width: 1100px;
+  margin: 0 auto;
+  padding: 10rem 2rem 5rem;
+}
+
+.c_header {
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+
+  @apply px-5;
+  width: 1100px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+}
+
+.logo01 {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: #00aa6e;
+  border-radius: 100vh;
+}
+
+.logo02 {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-left: -12px;
+  background-color: #fff;
+  border: 1px solid #00aa6e;
+  border-radius: 100vh;
+}
+
+.wp-block-image {
+  @apply mt-7;
+}
+
+.c_sidebar {
+  @media screen and (max-width: 1024px) {
+    @apply ease-in;
+  }
+
+  @apply fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0;
+}
+
+.LinkComp.active {
+  @apply text-gray-100 bg-gray-700;
+}
+
+.c_area_radar {
+}
