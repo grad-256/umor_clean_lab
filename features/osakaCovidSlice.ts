@@ -5,9 +5,6 @@ import jsondata from './d.json'
 import jsondata01 from './s.json'
 import jsondatamainsummary from './mainsummary.json'
 
-const apiUrl =
-  'https://raw.githubusercontent.com/codeforosaka/covid19/master/data/data.json'
-
 type JSONDATA = typeof jsondata
 type JSONDATA01 = typeof jsondata01
 type JSONDATAMAIN = typeof jsondatamainsummary
@@ -74,7 +71,9 @@ const initialState: OsakaCovidState = {
 export const fetchAsyncGetOsakaData = createAsyncThunk(
   'osakaCovid/getData',
   async () => {
-    const { data } = await axios.get<OsakaCovidStateObject>(`${apiUrl}`)
+    const { data } = await axios.get<OsakaCovidStateObject>(
+      `${process.env.NEXT_PUBLIC_COVID_API}`
+    )
 
     return {
       data: data.patients.data,
