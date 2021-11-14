@@ -42,7 +42,7 @@ const Covid = () => {
       <div className={`${styles.c_column_detail_wrap} justify-center`}>
         <section className={`${styles.c_column_detail}`}>
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
-            <h2 className="text-3xl font-bold">構築中</h2>
+            <h2 className="text-3xl font-bold">大阪 コロナ感染陽性者の内訳</h2>
           </div>
           <CovidDataComponents
             dateMainSummary={dateMainSummary}

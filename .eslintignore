@@ -11,3 +11,5 @@ build
 __tests__
 server.js
 createjson.js
+*.spec.js
+*.test.tsx
