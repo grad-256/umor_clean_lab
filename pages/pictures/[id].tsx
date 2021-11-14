@@ -1,11 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import Adsense from '@/components/Adsense'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
 import { time } from '@/libs/util'
+import { ParsedUrlQuery } from 'node:querystring'
 
 const Content = ({ pictureListContents, pictureList }) => {
   return (
@@ -65,7 +67,30 @@ const Content = ({ pictureListContents, pictureList }) => {
 
 export default Content
 
-export const getStaticPaths = async () => {
+type pictureListContentsTYPE = {
+  data: {
+    postBy: any
+  }
+}
+
+type pictureListTYPE = {
+  data: {
+    posts: {
+      edges: any
+    }
+  }
+}
+
+interface Params extends ParsedUrlQuery {
+  id: string
+}
+
+interface Props {
+  pictureListContents: pictureListContentsTYPE
+  pictureList: pictureListTYPE
+}
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const data: any = await client.query({
     query: Posts.getItems(),
     fetchPolicy: 'network-only',
@@ -82,8 +107,11 @@ export const getStaticPaths = async () => {
     fallback: false,
   }
 }
-export const getStaticProps = async (context: { params: { id: number } }) => {
-  const postId = context.params.id
+
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
+  const postId = params.id
 
   const pictureList: any = await client.query({
     query: Posts.getItems(),

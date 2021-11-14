@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
 import useSWR from 'swr'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
@@ -7,8 +8,18 @@ import Adsense from '@/components/Adsense'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
 import { time } from '@/libs/util'
+import { ParsedUrlQuery } from 'node:querystring'
 
-export default function Pictures({ pictureListContents }: any) {
+type PicturesTYPE = {
+  node: {
+    title: string
+    date: string
+    postId: number
+    featuredImage: { node: { sourceUrl: string } }
+  }
+}
+
+export default function Pictures({ pictureListContents }) {
   return (
     <Layout title="Pictures" type="article">
       <section className={`${styles.c_article_main}`}>
@@ -23,7 +34,7 @@ export default function Pictures({ pictureListContents }: any) {
           <h2 className={`${styles.c_column_title}`}>Pictures</h2>
           <div className={`${styles.c_pictures_list}`}>
             {pictureListContents &&
-              pictureListContents.map((v, i) => {
+              pictureListContents.map((v: PicturesTYPE, i: React.Key) => {
                 return (
                   <Fragment key={i}>
                     <article className={`${styles.c_pictures}`}>
@@ -52,7 +63,11 @@ export default function Pictures({ pictureListContents }: any) {
   )
 }
 
-export const getStaticProps = async (context) => {
+interface Params extends ParsedUrlQuery {
+  id: string
+}
+
+export const getStaticProps: GetStaticProps = async () => {
   const data: any = await client.query({
     query: Posts.getItems(),
     fetchPolicy: 'network-only',
