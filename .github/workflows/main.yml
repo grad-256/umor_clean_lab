@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     type: after_saving_wordpress
 
+  push:
+    branches: [main]
+
 env:
   BASE: 'main'
   NEXT_PUBLIC_QIITA: ${{secrets.NEXT_PUBLIC_QIITA}}

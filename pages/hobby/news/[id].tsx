@@ -39,7 +39,7 @@ const Content = ({ content, contentList, params }) => {
             dangerouslySetInnerHTML={{ __html: content.content }}
           />
         </article>
-        <div>
+        <div className={`${styles.c_column_recommend_content}`}>
           <p
             className={`text-2xl text-center mb-4 ${styles.c_column_recommend_title}`}
           >
