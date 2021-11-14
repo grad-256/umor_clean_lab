@@ -26,7 +26,6 @@ const PieChart: React.FC = () => {
       data={{
         labels: MainState.attr,
         datasets: [
-          // 表示するデータセット
           {
             data: MainState.value,
             label: '大阪のコロナ陽性患者数の内訳',
@@ -68,6 +67,7 @@ const PieChart: React.FC = () => {
         ],
       }}
       options={{
+        // @ts-ignore
         legend: {
           position: 'bottom',
           labels: {
