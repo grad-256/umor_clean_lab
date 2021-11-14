@@ -60,7 +60,7 @@ const initialState: OsakaCovidState = {
       小計: '',
     },
   ],
-  lastupdate: '2021/11/12 17:28',
+  lastupdate: '',
   main: {
     attr: '',
     children: [],

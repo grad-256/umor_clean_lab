@@ -11,6 +11,7 @@ import {
   selectOsakaLastUpdateDate,
   fetchAsyncGetOsakaData,
 } from '@/features/osakaCovidSlice'
+import CovidDataComponents from '@/components/CovidDataComponents'
 
 const Covid = () => {
   const dispatch = useDispatch()
@@ -22,8 +23,7 @@ const Covid = () => {
 
   useEffect(() => {
     dispatch(fetchAsyncGetOsakaData())
-    console.log({ dateMainSummary })
-  }, [])
+  }, [dispatch])
 
   return (
     <Layout
@@ -44,29 +44,10 @@ const Covid = () => {
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
             <h2 className="text-3xl font-bold">構築中</h2>
           </div>
-          {dateLastUpdate} 時点 大阪集計
-          <br />
-          {dateMainSummary.attr} / {dateMainSummary.value}
-          <div>
-            {dateMainSummary.children.map((v, i: number) => {
-              return (
-                <Fragment key={i}>
-                  <div>
-                    <p>{v.attr}</p>
-                    {v.children.map((v, i: number) => {
-                      return (
-                        <div key={i}>
-                          <p>{v.attr}</p>
-                          <p>{v.value}</p>
-                        </div>
-                      )
-                    })}
-                    <p>{v.value}</p>
-                  </div>
-                </Fragment>
-              )
-            })}
-          </div>
+          <CovidDataComponents
+            dateMainSummary={dateMainSummary}
+            dateLastUpdate={dateLastUpdate}
+          />
         </section>
       </div>
     </Layout>
