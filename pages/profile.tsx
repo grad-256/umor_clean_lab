@@ -82,10 +82,11 @@ const Profile = () => {
           </ul>
           <h3 className="text-xl font-bold mt-7">趣味</h3>
           <ul className={`text-base mt-3 ${styles.c_column_purpose_list}`}>
+            <li>映画鑑賞</li>
             <li>本屋さんで知識の収集をすること</li>
             <li>本を読んで実践してみること</li>
             <li>町中を歩き回って初めてを探すこと</li>
-            <li>映画鑑賞</li>
+            <li>雰囲気を写真で収めること</li>
           </ul>
           <h3 className="text-xl font-bold mt-7">関心のあること</h3>
           <ul className={`text-base mt-3 ${styles.c_column_purpose_list}`}>
