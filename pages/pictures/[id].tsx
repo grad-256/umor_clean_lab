@@ -65,18 +65,15 @@ const Content = ({ pictureListContents, pictureList }) => {
 
 export default Content
 
-//
 export const getStaticPaths = async () => {
   const data: any = await client.query({
     query: Posts.getItems(),
     fetchPolicy: 'network-only',
   })
   const posts = data.data.posts.edges
-  //console.log(data);
   const paths = []
-  posts.map((item, index) => {
-    //    console.log(item.node.postId);
-    let row = { params: { id: String(item.node.postId) } }
+  posts.map((item: { node: { postId: number } }) => {
+    const row = { params: { id: String(item.node.postId) } }
     paths.push(row)
   })
 
@@ -85,7 +82,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   }
 }
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: { params: { id: number } }) => {
   const postId = context.params.id
 
   const pictureList: any = await client.query({
