@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
+import { GetStaticProps } from 'next'
 import useSWR from 'swr'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
@@ -71,7 +72,7 @@ export default function Skill({ skillContents, qiitaContents }: any) {
   )
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const skillRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}skill`)
   const qiitaRes = await fetch(
     `${process.env.NEXT_PUBLIC_QIITA_API}items?per_page=100`,

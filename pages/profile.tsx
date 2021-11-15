@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 
-const Profile = () => {
+const Profile: React.FC = () => {
   return (
     <Layout title="プロフィール | Hobby Blog" type="article">
       <section className={`${styles.c_article_main}`}>

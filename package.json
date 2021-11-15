@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.17",
-    "@reduxjs/toolkit": "^1.6.0",
+    "@reduxjs/toolkit": "^1.6.2",
+    "@rtk-incubator/rtk-query": "^0.3.0",
     "@tailwindcss/forms": "^0.3.4",
     "@types/gsap": "^3.0.0",
     "axios": "^0.24.0",

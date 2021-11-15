@@ -3,13 +3,30 @@ import Link from 'next/link'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
-import Adsense from '@/components/Adsense'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
 import { time } from '@/libs/util'
 import { ParsedUrlQuery } from 'node:querystring'
 
-const Content = ({ pictureListContents, pictureList }) => {
+type CONTENTSTYPE = {
+  pictureListContents: {
+    title: string
+    content: string
+    date: string
+  }
+  pictureList: {
+    node: {
+      postId: number
+      title: string
+      date: string
+    }
+  }[]
+}
+
+const Content: React.FC<CONTENTSTYPE> = ({
+  pictureListContents,
+  pictureList,
+}) => {
   return (
     <Layout title={`${pictureListContents.title} | Pictures`} type="article">
       <div className={`${styles.c_article_main}`}>
@@ -60,7 +77,6 @@ const Content = ({ pictureListContents, pictureList }) => {
           </div>
         </div>
       </div>
-      {/* <Adsense /> */}
     </Layout>
   )
 }

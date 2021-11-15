@@ -1,11 +1,24 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
-import Adsense from '@/components/Adsense'
 import { time } from '@/libs/util'
 
-const Content = ({ content, contentList, params }) => {
+type CONTENTSTYPE = {
+  content: {
+    title: string
+    created_at: string
+    rendered_body: string
+  }
+  contentList: {
+    id: number
+    title: string
+    created_at: string
+  }[]
+}
+
+const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
   return (
     <Layout title={`${content.title} | Skill Blog`} type="article">
       <div className={`${styles.c_article_main}`}>
@@ -74,7 +87,7 @@ const Content = ({ content, contentList, params }) => {
 
 export default Content
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_QIITA_API}items?per_page=100`,
     {
@@ -93,7 +106,7 @@ export const getStaticPaths = async () => {
   return { paths, fallback: false }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const qiitaRes = await fetch(
     `${process.env.NEXT_PUBLIC_QIITA_API}items?per_page=100`,
     {
@@ -114,7 +127,6 @@ export const getStaticProps = async ({ params }) => {
     props: {
       content: filterContents[0],
       contentList: json,
-      params: params,
     },
   }
 }

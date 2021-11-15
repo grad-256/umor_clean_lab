@@ -1,11 +1,23 @@
 import React, { Fragment } from 'react'
+import { GetStaticProps } from 'next'
 import Link from 'next/link'
-import useSWR from 'swr'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
-import Adsense from '@/components/Adsense'
 
-export default function Hobby({ newsContents, diaryContents }: any) {
+type CONTENTSTYPE = {
+  newsContents: {
+    title: string
+    date: string
+    id: string
+  }[]
+  diaryContents: {
+    id: number
+    title: string
+    date: string
+  }[]
+}
+
+const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents, diaryContents }) => {
   return (
     <Layout title="Hobby Blog" type="article">
       <section className={`${styles.c_article_main}`}>
@@ -70,7 +82,9 @@ export default function Hobby({ newsContents, diaryContents }: any) {
   )
 }
 
-export const getStaticProps = async () => {
+export default Hobby
+
+export const getStaticProps: GetStaticProps = async () => {
   const newsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news`)
   const diaryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}diary`)
   const newsContents = await newsRes.json()

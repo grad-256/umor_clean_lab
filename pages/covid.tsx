@@ -13,7 +13,7 @@ import {
 } from '@/features/osakaCovidSlice'
 import CovidDataComponents from '@/components/CovidDataComponents'
 
-const Covid = () => {
+const Covid: React.FC = () => {
   const dispatch = useDispatch()
   // const daily = useSelector(selectDaily)
   const dataOsaka = useSelector(selectOsakaData)

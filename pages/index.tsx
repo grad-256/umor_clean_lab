@@ -61,7 +61,7 @@ const datay = {
   ],
 }
 
-const Index = () => {
+const Index: React.FC = () => {
   return (
     <Layout title="Umor Clean Lab" type="website">
       <h1 className={`${styles.c_pages_title}`}>UCLab</h1>
