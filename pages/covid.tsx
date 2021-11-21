@@ -1,12 +1,8 @@
 import React, { useEffect, Fragment } from 'react'
-import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  selectOsakaData,
-  selectOsakaDate,
-  selectOsakaTreatedDate,
   selectOsakaMainDate,
   selectOsakaLastUpdateDate,
   fetchAsyncGetOsakaData,
@@ -15,9 +11,6 @@ import CovidDataComponents from '@/components/CovidDataComponents'
 
 const Covid: React.FC = () => {
   const dispatch = useDispatch()
-  // const daily = useSelector(selectDaily)
-  const dataOsaka = useSelector(selectOsakaData)
-  const dateOsaka = useSelector(selectOsakaDate)
   const dateMainSummary = useSelector(selectOsakaMainDate)
   const dateLastUpdate = useSelector(selectOsakaLastUpdateDate)
 
@@ -38,9 +31,11 @@ const Covid: React.FC = () => {
           <img src="/about.svg" alt="about" />
         </div>
       </section>
-
+      {/* <span data-testid="count-value">{count}</span> */}
       <div className={`${styles.c_column_detail_wrap} justify-center`}>
-        <section className={`${styles.c_column_detail}`}>
+        <section
+          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
+        >
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
             <h2 className="text-3xl font-bold">大阪 コロナ感染陽性者の内訳</h2>
           </div>

@@ -13,7 +13,9 @@ const Privacy: React.FC = () => {
       </section>
 
       <div className={`${styles.c_column_detail_wrap} justify-center`}>
-        <section className={`${styles.c_column_detail}`}>
+        <section
+          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
+        >
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
             <h2 className="text-3xl font-bold">プライバシーポリシー</h2>
           </div>

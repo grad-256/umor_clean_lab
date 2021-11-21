@@ -74,7 +74,7 @@ const Index: React.FC = () => {
 
       <div className={`${styles.c_column_detail_wrap} justify-center`}>
         <section
-          className={`${styles.c_column_detail} ${styles.c_column_detail_coding}`}
+          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
         >
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
             <h2 className="text-3xl font-bold">コーディング</h2>
@@ -84,7 +84,7 @@ const Index: React.FC = () => {
             利用している方々の利益になっているかなど相手の幸福感や達成感も自身の満足度・やりがい・達成感・幸福度に強く影響する性格です。デザイン思考を学んだことで利用者を意識した開発をするようになったので、技術はプロダクト実現の手段なのだと思うようになりました。
           </p>
           <p className="text-base mt-3">
-            会社に在籍していると自分が関わりたいことになかなか関われず、自分の興味は多種多様で環境問題や企業DXに強く関心があります。そういったプロジェクトにアサインするチャンスを掴めやすいかもしれないと思い、独立意欲もあったことからフリーランスエンジニアとして案件に携わりたいと思うようになりました。
+            会社に在籍していると自分が関わりたいことになかなか関われず、自分の興味は多種多様で環境問題や官公庁・企業DXに強く関心があります。そういったプロジェクトにアサインするチャンスを掴めやすいかもしれないと思い、独立意欲もあったことからフリーランスエンジニアとして案件に携わりたいと思うようになりました。
           </p>
           <p className="mt-3">
             <a

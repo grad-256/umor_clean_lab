@@ -16,8 +16,8 @@
     "lint:scripts": "eslint --fix --ext .ts \"**/*.{tsx,ts}\"",
     "lint:styles": "stylelint \"**/*.css\"",
     "release": "standard-version",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cyopen": "cypress open",
+    "cyrun": "cypress run",
     "test": "jest --env=jsdom --verbose"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "date-fns-tz": "^1.1.6",
     "graphql": "^15.7.2",
     "gsap": "^3.8.0",
+    "msw": "^0.35.0",
     "next": "^12.0.1",
     "next-sitemap": "^1.6.203",
     "nprogress": "^0.2.0",

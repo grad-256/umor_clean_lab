@@ -34,6 +34,8 @@ const Pictures: React.FC<PicturesTYPE> = ({ pictureListContents }) => {
           <div className={`${styles.c_pictures_list}`}>
             {pictureListContents &&
               pictureListContents.map((v, i: React.Key) => {
+                if (v.node.featuredImage === null) return
+
                 return (
                   <Fragment key={i}>
                     <article className={`${styles.c_pictures}`}>

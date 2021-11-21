@@ -12,7 +12,9 @@ type JSONDATAMAIN = typeof jsondatamainsummary
 type OsakaCovidState = {
   man: number
   woman: number
+  // eslint-disable-next-line @typescript-eslint/ban-types
   place: Object
+  // eslint-disable-next-line @typescript-eslint/ban-types
   age: Object
   date: string
   data: JSONDATA
@@ -22,10 +24,6 @@ type OsakaCovidState = {
 }
 
 type OsakaReatedCovidState = {
-  data: JSONDATA01
-}
-
-type OsakaMainCovidState = {
   data: JSONDATA01
 }
 
@@ -85,7 +83,7 @@ export const fetchAsyncGetOsakaData = createAsyncThunk(
   }
 )
 
-const osakaCovidReducer = createSlice({
+const osakaCovidSlice = createSlice({
   name: 'osakaCovid',
   initialState: initialState,
   reducers: {
@@ -131,7 +129,7 @@ export const {
   fetchtestPlacedate,
   fetchtestAgedate,
   fetchtestSummarydate,
-} = osakaCovidReducer.actions
+} = osakaCovidSlice.actions
 
 export const selectOsakaPlace = (state: RootState) =>
   state.osakaCovidState.place
@@ -148,4 +146,4 @@ export const selectOsakaLastUpdateDate = (state: RootState) =>
 export const selectOsakaMainDate = (state: RootState) =>
   state.osakaCovidState.main
 
-export default osakaCovidReducer.reducer
+export default osakaCovidSlice.reducer

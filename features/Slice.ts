@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RootState } from '@/app/store'
 
 type sliceState = {
@@ -9,6 +9,19 @@ const initialState: sliceState = {
   slice: '',
 }
 
+export const fetchAsyncDeployApi = createAsyncThunk(
+  'deployApi/getData',
+  async () => {
+    const hash = new Date().getTime()
+    const data = await fetch('/deploytimestamp.json?' + hash)
+    const result = await data.json()
+
+    return {
+      data: result,
+    }
+  }
+)
+
 const sliceReducer = createSlice({
   name: 'slice',
   initialState: initialState,
@@ -16,6 +29,14 @@ const sliceReducer = createSlice({
     sliceState(state, action) {
       state.slice = action.payload
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAsyncDeployApi.fulfilled, (state, action) => {
+      return {
+        ...state,
+        data: action.payload.data,
+      }
+    })
   },
 })
 
