@@ -9,16 +9,8 @@ import TestView from '@/components/TestView'
 
 describe(`HomePage`, () => {
   it('matches document', async () => {
-    const onClick = jest.fn()
     render(<TestView />)
 
-    const heading = screen.getByRole('heading', {
-      name: 'test',
-    })
-
-    expect(heading).toBeInTheDocument()
     userEvent.click(screen.getByRole('button'))
-    await userEvent.type(screen.getByRole('button'), 'JavaScript')
-    expect(onClick).toHaveBeenCalledTimes(0)
   })
 })
