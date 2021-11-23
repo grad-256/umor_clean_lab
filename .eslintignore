@@ -11,5 +11,6 @@ build
 __tests__
 server.js
 createjson.js
-*.spec.js
+*.spec.ts
 *.test.tsx
+cypress
