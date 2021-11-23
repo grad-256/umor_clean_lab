@@ -1,12 +1,12 @@
 import React, { useEffect, Fragment } from 'react'
-import styles from '@/styles/Home.module.scss'
+import styles from '../styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   selectOsakaMainDate,
   selectOsakaLastUpdateDate,
   fetchAsyncGetOsakaData,
-} from '@/features/osakaCovidSlice'
+} from '../features/osakaCovidSlice'
 import CovidDataComponents from '@/components/CovidDataComponents'
 
 const Covid: React.FC = () => {

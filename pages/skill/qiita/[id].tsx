@@ -33,21 +33,6 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
             <h1 className="text-3xl font-bold mt-7">{content.title}</h1>
             <p className="text-sm mt-5">{time(content.created_at)}</p>
           </div>
-
-          {/* <div>
-          {content.categories.map((v, i) => {
-            return (
-              <Fragment key={i}>
-                <Link href={`/news/category/${v.id}`}>
-                  <a href="">
-                    <p>{v.name}</p>
-                  </a>
-                </Link>
-              </Fragment>
-            )
-          })}
-        </div>
- */}
           <div
             className={`${styles.c_contents}`}
             dangerouslySetInnerHTML={{ __html: content.rendered_body }}

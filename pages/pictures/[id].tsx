@@ -85,14 +85,24 @@ export default Content
 
 type pictureListContentsTYPE = {
   data: {
-    postBy: any
+    postBy: {
+      title: string
+      content: string
+      date: string
+    }
   }
 }
 
 type pictureListTYPE = {
   data: {
     posts: {
-      edges: any
+      edges: {
+        node: {
+          postId: number
+          title: string
+          date: string
+        }
+      }
     }
   }
 }
@@ -111,8 +121,10 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
     query: Posts.getItems(),
     fetchPolicy: 'network-only',
   })
+
   const posts = data.data.posts.edges
   const paths = []
+
   posts.map((item: { node: { postId: number } }) => {
     const row = { params: { id: String(item.node.postId) } }
     paths.push(row)

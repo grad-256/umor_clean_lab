@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Doughnut, Line, Bar } from 'react-chartjs-2'
 import { useSelector } from 'react-redux'
-import { selectOsakaMainDate } from '@/features/osakaCovidSlice'
+import { selectOsakaMainDate } from '../features/osakaCovidSlice'
 
 type MAINSUMMARYTYPE = {
   attr: string[]

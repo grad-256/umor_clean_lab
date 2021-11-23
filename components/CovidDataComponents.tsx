@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import PieChart from '@/components/PieChart'
 import styles from '@/styles/Home.module.scss'
 
 const CovidDataComponents = (props: {
@@ -40,7 +39,6 @@ const CovidDataComponents = (props: {
           )
         })}
       </div>
-      <PieChart />
     </>
   )
 }

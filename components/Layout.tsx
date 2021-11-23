@@ -38,6 +38,8 @@ const Layout = ({ title, type, children }) => {
           BgToggleState ? 'block' : 'hidden'
         }`}
         onClick={() => handleClose()}
+        aria-label="handleMenuClose"
+        role="button"
       ></div>
       <div
         className={`fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0 ${
@@ -239,6 +241,7 @@ const Layout = ({ title, type, children }) => {
             <button
               className="text-gray-500 focus:outline-none lg:hidden"
               onClick={() => handleMenu()}
+              aria-label="handleMenuOpen"
             >
               <svg
                 className="h-6 w-6"

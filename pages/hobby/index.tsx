@@ -3,17 +3,24 @@ import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
+import { time } from '@/libs/util'
+import client from '@/apollo-client'
+import Posts from '@/graphql/posts'
 
 type CONTENTSTYPE = {
   newsContents: {
-    title: string
-    date: string
-    id: string
+    node: {
+      newsItemId: number
+      title: string
+      date: string
+    }
   }[]
   diaryContents: {
-    id: number
-    title: string
-    date: string
+    node: {
+      diaryItemId: number
+      title: string
+      date: string
+    }
   }[]
 }
 
@@ -35,25 +42,14 @@ const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents, diaryContents }) => {
               return (
                 <Fragment key={i}>
                   <article className={`${styles.c_column}`}>
-                    <Link href={`/hobby/news/${v.id}`}>
+                    <Link href={`/hobby/news/${v.node.newsItemId}`}>
                       <a href="" className={`${styles.c_column_body}`}>
-                        <h3 className="text-2xl font-bold mt-5">{v.title}</h3>
-                        <p className="text-sm">{v.date}</p>
+                        <h3 className="text-2xl font-bold mt-5">
+                          {v.node.title}
+                        </h3>
+                        <p className="text-sm">{time(v.node.date)}</p>
                       </a>
                     </Link>
-                    {/* <div>
-                      {v.categories.map((v, i) => {
-                        return (
-                          <Fragment key={i}>
-                            <Link href={`/news/category/${v.id}`}>
-                              <a href="">
-                                <p>{v.name}</p>
-                              </a>
-                            </Link>
-                          </Fragment>
-                        )
-                      })}
-                    </div> */}
                   </article>
                 </Fragment>
               )
@@ -66,10 +62,12 @@ const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents, diaryContents }) => {
               return (
                 <Fragment key={i}>
                   <article className={`${styles.c_column}`}>
-                    <Link href={`/hobby/diary/${v.id}`}>
+                    <Link href={`/hobby/diary/${v.node.diaryItemId}`}>
                       <a href="" className="py-5 px-5 flex flex-col-reverse">
-                        <h3 className="text-xl font-bold mt-5">{v.title}</h3>
-                        <p className="text-sm">{v.date}</p>
+                        <h3 className="text-xl font-bold mt-5">
+                          {v.node.title}
+                        </h3>
+                        <p className="text-sm">{time(v.node.date)}</p>
                       </a>
                     </Link>
                   </article>
@@ -85,15 +83,19 @@ const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents, diaryContents }) => {
 export default Hobby
 
 export const getStaticProps: GetStaticProps = async () => {
-  const newsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news`)
-  const diaryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}diary`)
-  const newsContents = await newsRes.json()
-  const diaryContents = await diaryRes.json()
+  const dataNews: any = await client.query({
+    query: Posts.newsItems(),
+    fetchPolicy: 'network-only',
+  })
+  const dataDiary: any = await client.query({
+    query: Posts.diaryItems(),
+    fetchPolicy: 'network-only',
+  })
 
   return {
     props: {
-      newsContents: newsContents,
-      diaryContents: diaryContents,
+      newsContents: dataNews.data.newsItems.edges,
+      diaryContents: dataDiary.data.diaryItems.edges,
     },
   }
 }
