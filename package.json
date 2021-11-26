@@ -9,7 +9,7 @@
     "dev": "HTTPS=true node ./server.js",
     "build": "next build",
     "start": "next start",
-    "export": "NODE_ENV=production next build && next export -o build && next-sitemap --config sitemap.config.js && node createjson.js",
+    "export": "NODE_ENV=production next build && next export -o build && next-sitemap --config sitemap.config.js && node deploy.js",
     "check:format": "prettier --ignore-path .gitignore \"**/*.{tsx,ts}\" --check",
     "format": "npm run check:format --write",
     "lint": "run-p --print-label lint:*",
