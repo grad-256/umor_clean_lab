@@ -160,6 +160,7 @@ const Index: React.FC = () => {
                     <li>Redux</li>
                     <li>redux-toolkit</li>
                     <li>TailwindCss</li>
+                    <li>StroryBook</li>
                   </ul>
                 </div>
               </dd>
