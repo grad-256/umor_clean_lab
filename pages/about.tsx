@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
-import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 
-const About = () => {
+const About: React.FC = () => {
   return (
     <Layout title="このサイトについて | Hobby Blog" type="article">
       <section className={`${styles.c_article_main}`}>
@@ -14,7 +13,9 @@ const About = () => {
       </section>
 
       <div className={`${styles.c_column_detail_wrap} justify-center`}>
-        <section className={`${styles.c_column_detail}`}>
+        <section
+          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
+        >
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
             <h2 className="text-3xl font-bold">このサイトについて</h2>
           </div>

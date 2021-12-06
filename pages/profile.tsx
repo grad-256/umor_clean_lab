@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 
-const Profile = () => {
+const Profile: React.FC = () => {
   return (
     <Layout title="プロフィール | Hobby Blog" type="article">
       <section className={`${styles.c_article_main}`}>
@@ -13,7 +13,9 @@ const Profile = () => {
       </section>
 
       <div className={`${styles.c_column_detail_wrap} justify-center`}>
-        <section className={`${styles.c_column_detail}`}>
+        <section
+          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
+        >
           <div className={`${styles.c_column_detail_title} text-center pb-6`}>
             <h2 className="text-3xl font-bold">プロフィール</h2>
           </div>
@@ -31,22 +33,23 @@ const Profile = () => {
           >
             社会貢献したいと思うようになった理由
           </a>
-          <p className="text-base mt-7">
-            1987年5月25日香川県生まれの京都育ち大阪在住
-            <br />
-            大手アパレル会社販売員からWebエンジニアへ転向
-            <br />
+          <p className="text-base mt-7 leading-7">
+            1987/5/25
+            香川県生まれの京都育ち大阪在住です。大手アパレル会社販売員からWebエンジニアへ転向しました。
+          </p>
+          <p className="text-base mt-3 leading-7">
             web業界に入るまではアパレル業界に約7年ほどおりました。そこでECサイトの立ち上げがあり、興味本位で出会ったのがフロントエンドエンジニアの方なら誰でも使用しているであろうHTML・CSS・Javascriptでした。
             今となっては、欠かせない言語となり、Webエンジニアとしてフロントエンド開発を行っております。
-            <br />
-            フロントエンドエンジニアとして6年システム会社や制作会社で実装経験を積み、デザイン思考の知識も必要と感じ知識収集のためにそれに関係してそうな資格を取得しました。
+          </p>
+          <p className="text-base mt-3 leading-7">
+            フロントエンドエンジニアとして約7年システム会社や制作会社で実装経験を積み、デザイン思考の知識も必要と感じ知識収集のためにそれに関係してそうな資格を取得しました。
             <br />
             単純な設計、開発業務だけではなく日々アップデートされる最新技術をキャッチアップし、常に技術的な視点からの提案ができるよう日々学習に取り組んでおります。
             <br />
             デザイン業務の経験はありませんがHPやLP、アニメーション実装やシステム系フロントエンド構築など実務経験幅が広く様々な場面で対応可能ですし、販売員経験で培ったコミュニケーション力が武器です。
           </p>
           <h3 className="text-xl font-bold mt-7">最近気が付いたこと</h3>
-          <p className="text-base mt-3">
+          <p className="text-base mt-3 leading-7">
             ESG思考やDX思考は当然であることです。
             <br />
             環境にやさしいもの作りをしたりそういったものを買ったり、働く環境にITを導入し生産性を上げたり、生産性を上げるためにどんな技術があるのかを知ることは特別なことではないように思いました。
@@ -81,10 +84,11 @@ const Profile = () => {
           </ul>
           <h3 className="text-xl font-bold mt-7">趣味</h3>
           <ul className={`text-base mt-3 ${styles.c_column_purpose_list}`}>
+            <li>映画鑑賞</li>
             <li>本屋さんで知識の収集をすること</li>
             <li>本を読んで実践してみること</li>
             <li>町中を歩き回って初めてを探すこと</li>
-            <li>映画鑑賞</li>
+            <li>雰囲気を写真で収めること</li>
           </ul>
           <h3 className="text-xl font-bold mt-7">関心のあること</h3>
           <ul className={`text-base mt-3 ${styles.c_column_purpose_list}`}>

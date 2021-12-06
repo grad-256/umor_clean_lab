@@ -40,6 +40,7 @@ module.exports = {
     return {
       '/': { page: '/' },
       '/privacy': { page: '/privacy' },
+      '/pictures': { page: '/pictures' },
       '/covid': { page: '/covid' },
       '/about': { page: '/about' },
       '/inquiry': { page: '/inquiry' },

@@ -4,8 +4,18 @@ on:
   repository_dispatch:
     type: after_saving_wordpress
 
+  push:
+    branches: [main]
+
 env:
   BASE: 'main'
+  NEXT_PUBLIC_QIITA: ${{secrets.NEXT_PUBLIC_QIITA}}
+  NEXT_PUBLIC_QIITA_API: ${{secrets.NEXT_PUBLIC_QIITA_API}}
+  NEXT_PUBLIC_API_GQL_URL: ${{secrets.NEXT_PUBLIC_API_GQL_URL}}
+  NEXT_PUBLIC_COVID_API: ${{secrets.NEXT_PUBLIC_COVID_API}}
+  NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{secrets.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}}
+  NEXT_PUBLIC_ADSENSE_ID: ${{secrets.NEXT_PUBLIC_ADSENSE_ID}}
+  NEXT_PUBLIC_API_URL: ${{secrets.NEXT_PUBLIC_API_URL}}
 
 jobs:
   build:

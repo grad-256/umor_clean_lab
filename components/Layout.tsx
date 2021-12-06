@@ -38,6 +38,8 @@ const Layout = ({ title, type, children }) => {
           BgToggleState ? 'block' : 'hidden'
         }`}
         onClick={() => handleClose()}
+        aria-label="handleMenuClose"
+        role="button"
       ></div>
       <div
         className={`fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0 ${
@@ -143,6 +145,27 @@ const Layout = ({ title, type, children }) => {
               <span className="mx-3">Profile</span>
             </a>
           </Link>
+          <Link href="/pictures">
+            <a
+              className={`LinkComp flex items-center mt-4 py-2 px-6 text-base hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 text-gray-500`}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                ></path>
+              </svg>
+              <span className="mx-3">Pictures</span>
+            </a>
+          </Link>
           <Link href="/about">
             <a
               className={`LinkComp flex items-center mt-4 py-2 px-6 text-base hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 text-gray-500`}
@@ -218,6 +241,7 @@ const Layout = ({ title, type, children }) => {
             <button
               className="text-gray-500 focus:outline-none lg:hidden"
               onClick={() => handleMenu()}
+              aria-label="handleMenuOpen"
             >
               <svg
                 className="h-6 w-6"

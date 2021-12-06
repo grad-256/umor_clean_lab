@@ -1,12 +1,28 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
-import useSWR from 'swr'
+import { GetStaticProps } from 'next'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
-import Adsense from '@/components/Adsense'
 import { time } from '@/libs/util'
+import client from '@/apollo-client'
+import Posts from '@/graphql/posts'
 
-export default function Skill({ skillContents, qiitaContents }: any) {
+type SkillTYPE = {
+  skillContents: {
+    node: {
+      skillItemId: number
+      title: string
+      date: string
+    }
+  }[]
+  qiitaContents: {
+    id: number
+    title: string
+    created_at: string
+  }[]
+}
+
+const Skill: React.FC<SkillTYPE> = ({ skillContents, qiitaContents }) => {
   return (
     <Layout title="Skill Blog" type="article">
       <section className={`${styles.c_article_main}`}>
@@ -30,19 +46,6 @@ export default function Skill({ skillContents, qiitaContents }: any) {
                         <p className="text-sm">{time(v.created_at)}</p>
                       </a>
                     </Link>
-                    {/* <div>
-                      {v.categories.map((v, i) => {
-                        return (
-                          <Fragment key={i}>
-                            <Link href={`/news/category/${v.id}`}>
-                              <a href="">
-                                <p>{v.name}</p>
-                              </a>
-                            </Link>
-                          </Fragment>
-                        )
-                      })}
-                    </div> */}
                   </article>
                 </Fragment>
               )
@@ -55,10 +58,12 @@ export default function Skill({ skillContents, qiitaContents }: any) {
               return (
                 <Fragment key={i}>
                   <article className={`${styles.c_column}`}>
-                    <Link href={`/skill/wp/${v.id}`}>
+                    <Link href={`/skill/wp/${v.node.skillItemId}`}>
                       <a href="" className="py-5 px-5 flex flex-col-reverse">
-                        <h3 className="text-xl font-bold mt-5">{v.title}</h3>
-                        <p className="text-sm">{v.date}</p>
+                        <h3 className="text-xl font-bold mt-5">
+                          {v.node.title}
+                        </h3>
+                        <p className="text-sm">{time(v.node.date)}</p>
                       </a>
                     </Link>
                   </article>
@@ -71,8 +76,14 @@ export default function Skill({ skillContents, qiitaContents }: any) {
   )
 }
 
-export const getStaticProps = async () => {
-  const skillRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}skill`)
+export default Skill
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data: any = await client.query({
+    query: Posts.skillItems(),
+    fetchPolicy: 'network-only',
+  })
+
   const qiitaRes = await fetch(
     `${process.env.NEXT_PUBLIC_QIITA_API}items?per_page=100`,
     {
@@ -82,12 +93,11 @@ export const getStaticProps = async () => {
       },
     }
   )
-  const skillContents = await skillRes.json()
   const qiitaContents = await qiitaRes.json()
 
   return {
     props: {
-      skillContents: skillContents,
+      skillContents: data.data.skillItems.edges,
       qiitaContents: qiitaContents,
     },
   }

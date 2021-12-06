@@ -38,3 +38,7 @@ yarn-error.log*
 
 /.vscode
 ssl
+
+cypress/screenshots
+cypress/node_modules
+cypress/videos
