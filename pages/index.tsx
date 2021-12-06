@@ -144,7 +144,7 @@ const Index: React.FC = () => {
               <dd>
                 <div>
                   <ul className={`${styles.c_list}`}>
-                    <li>Javascript</li>
+                    <li>JavaScript</li>
                     <li>React.js</li>
                     <li>Next.js</li>
                   </ul>
@@ -159,8 +159,8 @@ const Index: React.FC = () => {
                     <li>TypeScript</li>
                     <li>Redux</li>
                     <li>redux-toolkit</li>
-                    <li>TailwindCss</li>
-                    <li>StroryBook</li>
+                    <li>tailwindcss</li>
+                    <li>StoryBook</li>
                   </ul>
                 </div>
               </dd>
@@ -220,7 +220,7 @@ const Index: React.FC = () => {
                   <ul className={`${styles.c_list}`}>
                     <li>React Native</li>
                     <li>アーキテクチャ設計</li>
-                    <li>AWS</li>
+                    <li>AWS Amplify</li>
                   </ul>
                 </div>
               </dd>
