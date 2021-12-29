@@ -35,12 +35,14 @@
     "@types/gsap": "^3.0.0",
     "axios": "^0.24.0",
     "chart.js": "^3.6.0",
+    "cheerio": "^1.0.0-rc.10",
     "date-fns": "^2.25.0",
     "date-fns-tz": "^1.1.6",
     "graphql": "^15.7.2",
     "gsap": "^3.8.0",
+    "highlight.js": "^11.3.1",
     "msw": "^0.35.0",
-    "next": "^12.0.1",
+    "next": "^12.0.7",
     "next-sitemap": "^1.6.203",
     "nprogress": "^0.2.0",
     "react": "^17.0.2",
@@ -49,7 +51,7 @@
     "react-redux": "^7.2.6",
     "sass": "^1.35.2",
     "swr": "^1.0.1",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^2.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -113,6 +115,6 @@
     "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.20.0",
     "ts-node": "^10.1.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.4"
   }
 }

@@ -1,37 +1,41 @@
-// import { getPreviewPost } from '../../lib/api'
+/**
+ * api/preview
+ * @package pages
+ */
+import { NextApiResponse, NextApiRequest } from 'next'
+/* config */
+// import globalAxios from '@/config/globalAxios'
 
-export default async function preview(req, res) {
-  const { secret, id, slug } = req.query
+/**
+ * constant
+ */
+const BASE_URL = `${
+  process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:4300/'
+}/blogs/`
 
-  // Check the secret and next parameters
-  // This secret should only be known by this API route
-  // if (
-  //   !process.env.WORDPRESS_PREVIEW_SECRET ||
-  //   secret !== process.env.WORDPRESS_PREVIEW_SECRET ||
-  //   (!id && !slug)
-  // ) {
-  //   return res.status(401).json({ message: 'Invalid token' })
-  // }
+/**
+ * プレビューAPI
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ * @returns
+ */
+const preview = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (!req.query.slug) {
+    return res.status(404).end()
+  }
 
-  // Fetch WordPress to check if the provided `id` or `slug` exists
-  // const post = await getPreviewPost(id || slug, id ? 'DATABASE_ID' : 'SLUG')
+  const content = await fetch(`${BASE_URL}${req.query.slug}`)
 
-  // If the post doesn't exist prevent preview mode from being enabled
-  // if (!post) {
-  //   return res.status(401).json({ message: 'Post not found' })
-  // }
+  if (!content) {
+    return res.status(401).json({ message: 'Invalid slug' })
+  }
 
-  // Enable Preview Mode by setting the cookies
   // res.setPreviewData({
-  //   post: {
-  //     id: post.databaseId,
-  //     slug: post.slug,
-  //     status: post.status,
-  //   },
+  //   blogId: content.data.id,
+  //   draftKey: req.query.draftKey,
   // })
-
-  // Redirect to the path from the fetched post
-  // We don't redirect to `req.query.slug` as that might lead to open redirect vulnerabilities
-  // res.writeHead(307, { Location: `/posts/${post.slug || post.databaseId}` })
-  // res.end()
+  // res.writeHead(307, { Location: `/${content.data.id}` })
+  res.end('Preview mode enabled')
 }
+
+export default preview
