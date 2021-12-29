@@ -13,6 +13,7 @@ const Preview = () => {
     const post_url = 'https://256-anything.site/wp/wp-json/wp/v2/posts/' + id
 
     axios
+      // @ts-ignore
       .get(post_url, { headers: { 'X-WP-Nonce': nonce } })
       .then((response) => {
         const article = response.data
