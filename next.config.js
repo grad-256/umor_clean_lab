@@ -45,7 +45,9 @@ module.exports = {
       '/about': { page: '/about' },
       '/inquiry': { page: '/inquiry' },
       '/profile': { page: '/profile' },
-      '/preview': { page: '/preview' },
+      '/preview/news': { page: '/preview/news' },
+      '/preview/skill': { page: '/preview/skill' },
+      '/preview/diary': { page: '/preview/diary' },
     }
   },
 }
