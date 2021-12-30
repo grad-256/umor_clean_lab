@@ -46,8 +46,63 @@ const post = {
         date
         link
         content
+        blocks {
+      ... on CoreParagraphBlock {
+        originalContent
+        attributesJSON
+        dynamicContent
+        attributes {
+          ... on CoreParagraphBlockAttributes {
+            content
+          }
+        }
+      }
+      name
+      order
+      ... on CoreTableBlock {
+        attributesJSON
+        dynamicContent
+        name
+        order
+        attributes {
+          ... on CoreTableBlockAttributes {
+            align
+            anchor
+            head {
+              cells {
+                align
+                content
+                scope
+              }
+            }
+            foot {
+              cells {
+                align
+                scope
+              }
+            }
+            body {
+              cells {
+                align
+                content
+                scope
+              }
+            }
+          }
+        }
       }
     }
+    isPreview
+    preview {
+      node {
+        id
+        status
+        skillItemId
+      }
+    }
+  }
+}
+
    `
   },
   skillItems: function () {
