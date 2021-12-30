@@ -10,8 +10,8 @@ import { NextApiResponse, NextApiRequest } from 'next'
  * constant
  */
 const BASE_URL = `${
-  process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:4300/'
-}/blogs/`
+  'https://256-anything.site/' || 'https://localhost:4300/'
+}/pictures/`
 
 /**
  * プレビューAPI
@@ -25,6 +25,7 @@ const preview = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const content = await fetch(`${BASE_URL}${req.query.slug}`)
+  console.log({ content })
 
   if (!content) {
     return res.status(401).json({ message: 'Invalid slug' })
@@ -34,7 +35,7 @@ const preview = async (req: NextApiRequest, res: NextApiResponse) => {
   //   blogId: content.data.id,
   //   draftKey: req.query.draftKey,
   // })
-  // res.writeHead(307, { Location: `/${content.data.id}` })
+  // res.writeHead(307, { Location: `/${content.id}` })
   res.end('Preview mode enabled')
 }
 

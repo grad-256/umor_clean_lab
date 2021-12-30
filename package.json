@@ -6,7 +6,7 @@
     "node": "16.13.0"
   },
   "scripts": {
-    "dev": "HTTPS=true node ./server.js",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "export": "NODE_ENV=production next build && next export -o build && next-sitemap --config sitemap.config.js && node deploy.js",
@@ -21,8 +21,8 @@
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
     "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test dev https://localhost:4300 cypress",
-    "e2e:headless": "start-server-and-test dev https://localhost:4300 cypress:headless",
+    "e2e": "start-server-and-test dev http://localhost:3000 cypress",
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
     "test": "jest --env=jsdom --verbose",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
