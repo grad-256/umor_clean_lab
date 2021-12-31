@@ -19,6 +19,32 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
+  const [ContentShowState, setContentShowState] = useState(5)
+  const [ContentListState, setContentListState] = useState([])
+  const [MoreButtonState, setMoreButtonState] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (contentList === undefined) return
+
+    if (contentList.length >= ContentShowState) {
+      setMoreButtonState(false)
+    } else {
+      setMoreButtonState(true)
+    }
+    // eslint-disable-next-line prefer-const
+    let contentListFilter = []
+    for (let i = 0; i <= ContentShowState - 1; i++) {
+      if (contentList[i] !== undefined) {
+        contentListFilter.push(contentList[i])
+      }
+    }
+    setContentListState(contentListFilter)
+  }, [contentList, ContentShowState])
+
+  const handleMoreBottom = () => {
+    setContentShowState(ContentShowState * 2)
+  }
+
   return (
     <Layout title={`${content.title} | Skill Blog`} type="article">
       <div className={`${styles.c_article_main}`}>
@@ -45,8 +71,8 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
             - Recommend -
           </p>
           <div className={`${styles.c_column_recommend_wrap}`}>
-            {contentList &&
-              contentList.map((v, i) => {
+            {ContentListState &&
+              ContentListState.map((v, i) => {
                 return (
                   <Fragment key={i}>
                     <section
@@ -62,6 +88,14 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
                   </Fragment>
                 )
               })}
+            <button
+              onClick={() => handleMoreBottom()}
+              type="button"
+              disabled={MoreButtonState}
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
+            >
+              もっと見る
+            </button>
           </div>
         </div>
       </div>

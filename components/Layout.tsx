@@ -236,7 +236,7 @@ const Layout = ({ title, type, children }) => {
       </div>
 
       <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-        <header className="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-indigo-600">
+        <header className="flex justify-between items-center py-4 px-6 bg-white border-b-4 border-[#35478C]">
           <div className="flex items-center">
             <button
               className="text-gray-500 focus:outline-none lg:hidden"

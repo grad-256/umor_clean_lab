@@ -2,7 +2,7 @@ import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import PageNews from '@/components/PageNews'
+import PageDetail from '@/components/PageDetail'
 
 type CONTENTSTYPE = {
   content: {
@@ -20,7 +20,14 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
-  return <PageNews content={content} contentList={contentList} />
+  return (
+    <PageDetail
+      title="News"
+      URL="/hobby/news/"
+      content={content}
+      contentList={contentList}
+    />
+  )
 }
 
 export default Content
@@ -48,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postId = Number(params.id)
 
   const newsItems: any = await client.query({
-    query: Posts.newsItems(),
+    query: Posts.newsItemsAll(),
     fetchPolicy: 'network-only',
   })
 

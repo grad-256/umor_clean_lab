@@ -258,6 +258,10 @@
   }
 }
 
+.c_column_news.c_column_w_full {
+  @apply w-full mr-0;
+}
+
 .c_column_diary {
   @media screen and (max-width: 1200px) {
     width: 100%;

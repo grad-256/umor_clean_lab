@@ -1,10 +1,14 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
+import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
 
 const PageSkill = ({ content, contentList }) => {
+  const { handleMoreBottom, ContentListState, MoreButtonState } =
+    useContentsMore(contentList)
+
   return (
     <Layout title={`${content.title} | Skill Blog`} type="article">
       <div className={`${styles.c_article_main}`}>
@@ -31,8 +35,8 @@ const PageSkill = ({ content, contentList }) => {
             - Recommend -
           </p>
           <div className={`${styles.c_column_recommend_wrap}`}>
-            {contentList &&
-              contentList.map((v, i) => {
+            {ContentListState &&
+              ContentListState.map((v, i) => {
                 return (
                   <Fragment key={i}>
                     <section
@@ -50,6 +54,14 @@ const PageSkill = ({ content, contentList }) => {
                   </Fragment>
                 )
               })}
+            <button
+              onClick={() => handleMoreBottom()}
+              type="button"
+              disabled={MoreButtonState}
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
+            >
+              もっと見る
+            </button>
           </div>
         </div>
       </div>

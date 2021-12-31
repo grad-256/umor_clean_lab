@@ -54,6 +54,15 @@ const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents, diaryContents }) => {
                 </Fragment>
               )
             })}
+
+          <Link href={`/hobby/news/`}>
+            <a
+              href=""
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 maxsm:w-10/12"
+            >
+              もっと見る
+            </a>
+          </Link>
         </section>
         <section className={`${styles.c_column_diary}`}>
           <h2 className={`${styles.c_column_title}`}>Diary</h2>
@@ -74,6 +83,14 @@ const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents, diaryContents }) => {
                 </Fragment>
               )
             })}
+          <Link href={`/hobby/diary/`}>
+            <a
+              href=""
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 maxsm:w-10/12"
+            >
+              もっと見る
+            </a>
+          </Link>
         </section>
       </div>
     </Layout>

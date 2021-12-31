@@ -50,6 +50,14 @@ const Skill: React.FC<SkillTYPE> = ({ skillContents, qiitaContents }) => {
                 </Fragment>
               )
             })}
+          <Link href={`/skill/qiita/`}>
+            <a
+              href=""
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 maxsm:w-10/12"
+            >
+              もっと見る
+            </a>
+          </Link>
         </section>
         <section className={`${styles.c_column_diary}`}>
           <h2 className={`${styles.c_column_title}`}>Skill - WP -</h2>
@@ -70,6 +78,14 @@ const Skill: React.FC<SkillTYPE> = ({ skillContents, qiitaContents }) => {
                 </Fragment>
               )
             })}
+          <Link href={`/skill/wp/`}>
+            <a
+              href=""
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 maxsm:w-10/12"
+            >
+              もっと見る
+            </a>
+          </Link>
         </section>
       </div>
     </Layout>
@@ -85,7 +101,7 @@ export const getStaticProps: GetStaticProps = async () => {
   })
 
   const qiitaRes = await fetch(
-    `${process.env.NEXT_PUBLIC_QIITA_API}items?per_page=100`,
+    `${process.env.NEXT_PUBLIC_QIITA_API}items?per_page=5`,
     {
       headers: {
         'Content-Type': 'application/json',

@@ -1,16 +1,20 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
+import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
 
-const PageNews = ({ content, contentList }) => {
+const PageDiary = ({ title, URL, content, contentList }) => {
+  const { handleMoreBottom, ContentListState, MoreButtonState } =
+    useContentsMore(contentList)
+
   return (
-    <Layout title={`${content.title} | Pictures`} type="article">
+    <Layout title={`${content.title} | ${title}`} type="article">
       <div className={`${styles.c_article_main}`}>
-        <p className="text-4xl font-bold text-center">- Pictures -</p>
+        <p className="text-4xl font-bold text-center">- {`${title}`}-</p>
         <div className={`${styles.c_article_hero}`}>
-          <img src="/diary.svg" alt="diary" />
+          <img src="/blog.svg" alt="blog" />
         </div>
       </div>
       <div className={`${styles.c_column_detail_wrap}`}>
@@ -31,14 +35,14 @@ const PageNews = ({ content, contentList }) => {
             - Recommend -
           </p>
           <div className={`${styles.c_column_recommend_wrap}`}>
-            {contentList &&
-              contentList.map((v, i) => {
+            {ContentListState &&
+              ContentListState.map((v, i) => {
                 return (
                   <Fragment key={i}>
                     <section
                       className={`${styles.c_column} ${styles.c_column_recommend}`}
                     >
-                      <Link href={`/hobby/news/${v.node.newsItemId}`}>
+                      <Link href={`${URL}${v.node[Object.keys(v.node)['5']]}`}>
                         <a href="" className="py-5 px-5 flex flex-col-reverse">
                           <h3 className="text-xl font-bold mt-5">
                             {v.node.title}
@@ -50,6 +54,14 @@ const PageNews = ({ content, contentList }) => {
                   </Fragment>
                 )
               })}
+            <button
+              onClick={() => handleMoreBottom()}
+              type="button"
+              disabled={MoreButtonState}
+              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
+            >
+              もっと見る
+            </button>
           </div>
         </div>
       </div>
@@ -57,4 +69,4 @@ const PageNews = ({ content, contentList }) => {
   )
 }
 
-export default PageNews
+export default PageDiary

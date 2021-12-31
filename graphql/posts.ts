@@ -108,6 +108,23 @@ const post = {
   skillItems: function () {
     return gql`
       query {
+        skillItems(first: 5) {
+          edges {
+            node {
+              id
+              title
+              date
+              content
+              skillItemId
+            }
+          }
+        }
+      }
+    `
+  },
+  skillItemsAll: function () {
+    return gql`
+      query {
         skillItems {
           edges {
             node {
@@ -122,6 +139,7 @@ const post = {
       }
     `
   },
+
   newsItem: function (id: number) {
     return gql`
     query {
@@ -189,6 +207,23 @@ const post = {
    `
   },
   newsItems: function () {
+    return gql`
+      query {
+        newsItems(first: 5) {
+          edges {
+            node {
+              id
+              title
+              date
+              content
+              newsItemId
+            }
+          }
+        }
+      }
+    `
+  },
+  newsItemsAll: function () {
     return gql`
       query {
         newsItems {
@@ -264,7 +299,7 @@ const post = {
       node {
         id
         status
-        newsItemId
+        diaryItemId
       }
     }
     }
@@ -272,6 +307,23 @@ const post = {
    `
   },
   diaryItems: function () {
+    return gql`
+      query {
+        diaryItems(first: 5) {
+          edges {
+            node {
+              id
+              title
+              date
+              content
+              diaryItemId
+            }
+          }
+        }
+      }
+    `
+  },
+  diaryItemsAll: function () {
     return gql`
       query {
         diaryItems {

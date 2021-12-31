@@ -20,6 +20,8 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
+  console.log({ contentList })
+
   return <PageSkill content={content} contentList={contentList} />
 }
 
@@ -48,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postId = Number(params.id)
 
   const skillItems: any = await client.query({
-    query: Posts.skillItems(),
+    query: Posts.skillItemsAll(),
     fetchPolicy: 'network-only',
   })
 
