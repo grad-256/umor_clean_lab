@@ -15,7 +15,7 @@ const Preview = () => {
     if (!id || !nonce) return
     const f = async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}news?_embed&status=draft`,
+        `${process.env.NEXT_PUBLIC_API_URL}news/${id}/?_embed&status=draft`,
         {
           headers: {
             // @ts-ignore

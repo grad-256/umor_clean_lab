@@ -4,6 +4,7 @@ import PostSkill from '@/components/PostSkill'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
 import axios from 'axios'
+import PageSkill from '@/components/PageSkill'
 
 const Preview = () => {
   const router = useRouter()
@@ -14,31 +15,29 @@ const Preview = () => {
   useEffect(() => {
     if (!id || !nonce) return
     const f = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}skill/${id}/?_embed&status=draft`,
-        {
-          headers: {
-            // @ts-ignore
-            'X-WP-Nonce': nonce,
-          },
-        }
-      )
-      const json = await res.json()
-      console.log({ json })
+      const skillItems: any = await client.query({
+        query: Posts.skillItems(),
+        fetchPolicy: 'network-only',
+      })
 
       const pictureContents: any = await client.query({
         query: Posts.skillItem(Number(id)),
         fetchPolicy: 'network-only',
       })
 
-      changePost(pictureContents)
+      changePost([pictureContents, skillItems])
     }
     f()
   }, [id, nonce])
 
   if (typeof window === 'undefined') return null
 
-  return post ? <PostSkill post={post} /> : null
+  return post ? (
+    <PageSkill
+      content={post[0].data.skillItemBy}
+      contentList={post[1].data.skillItems.edges}
+    />
+  ) : null
 }
 
 export default Preview
