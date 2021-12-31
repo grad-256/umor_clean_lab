@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import PostDiary from '@/components/PostDiary'
+import PageDiary from '@/components/PageDiary'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import axios from 'axios'
 
 const Preview = () => {
   const router = useRouter()
@@ -14,31 +13,29 @@ const Preview = () => {
   useEffect(() => {
     if (!id || !nonce) return
     const f = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}diary/${id}/?_embed&status=draft`,
-        {
-          headers: {
-            // @ts-ignore
-            'X-WP-Nonce': nonce,
-          },
-        }
-      )
-      const json = await res.json()
-      console.log({ json })
+      const diaryItems: any = await client.query({
+        query: Posts.diaryItems(),
+        fetchPolicy: 'network-only',
+      })
 
-      const pictureContents: any = await client.query({
+      const diaryContents: any = await client.query({
         query: Posts.diaryItem(Number(id)),
         fetchPolicy: 'network-only',
       })
 
-      changePost(pictureContents)
+      changePost([diaryContents, diaryItems])
     }
     f()
   }, [id, nonce])
 
   if (typeof window === 'undefined') return null
 
-  return post ? <PostDiary post={post} /> : null
+  return post ? (
+    <PageDiary
+      content={post[0].data.skillItemBy}
+      contentList={post[1].data.skillItems.edges}
+    />
+  ) : null
 }
 
 export default Preview

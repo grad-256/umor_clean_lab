@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import Link from 'next/link'
+import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import styles from '@/styles/Home.module.scss'
-import Layout from '@/components/Layout'
+import client from '@/apollo-client'
+import Posts from '@/graphql/posts'
+import PageNews from '@/components/PageNews'
 
 type CONTENTSTYPE = {
   content: {
@@ -11,89 +11,56 @@ type CONTENTSTYPE = {
     content: string
   }
   contentList: {
-    id: number
-    title: string
-    date: string
+    node: {
+      id: number
+      title: string
+      date: string
+    }
   }[]
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
-  return (
-    <Layout title={`${content.title} | Hobby Blog`} type="article">
-      <div className={`${styles.c_article_main}`}>
-        <p className="text-4xl font-bold text-center">- News -</p>
-        <div className={`${styles.c_article_hero}`}>
-          <img src="/news.svg" alt="news" />
-        </div>
-      </div>
-      <div className={`${styles.c_column_detail_wrap}`}>
-        <article className={`${styles.c_column_detail}`}>
-          <div className={`${styles.c_column_detail_title}`}>
-            <h1 className="text-3xl font-bold mt-7">{content.title}</h1>
-            <p className="text-sm mt-5">{content.date}</p>
-          </div>
-          <div
-            className={`${styles.c_contents}`}
-            dangerouslySetInnerHTML={{ __html: content.content }}
-          />
-        </article>
-        <div className={`${styles.c_column_recommend_content}`}>
-          <p
-            className={`text-2xl text-center mb-4 ${styles.c_column_recommend_title}`}
-          >
-            - Recommend -
-          </p>
-          <div className={`${styles.c_column_recommend_wrap}`}>
-            {contentList &&
-              contentList.map((v, i) => {
-                return (
-                  <Fragment key={i}>
-                    <section
-                      className={`${styles.c_column} ${styles.c_column_recommend}`}
-                    >
-                      <Link href={`/hobby/news/${v.id}`}>
-                        <a href="" className="py-5 px-5 flex flex-col-reverse">
-                          <h3 className="text-xl font-bold mt-5">{v.title}</h3>
-                          <p className="text-sm">{v.date}</p>
-                        </a>
-                      </Link>
-                    </section>
-                  </Fragment>
-                )
-              })}
-          </div>
-        </div>
-      </div>
-      {/* <Adsense /> */}
-    </Layout>
-  )
+  return <PageNews content={content} contentList={contentList} />
 }
 
 export default Content
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news`)
-  const json = await res.json()
-
-  const paths = json.map((contents: { id: string }) => {
-    return `/hobby/news/${contents.id}`
+  const data: any = await client.query({
+    query: Posts.newsItems(),
+    fetchPolicy: 'network-only',
   })
 
-  return { paths, fallback: false }
+  const posts = data.data.newsItems.edges
+  const paths = []
+  posts.map((item: { node: { newsItemId: number } }) => {
+    const row = { params: { id: String(item.node.newsItemId) } }
+    paths.push(row)
+  })
+
+  return {
+    paths: paths,
+    fallback: false,
+  }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news`)
-  const json = await res.json()
+  const postId = Number(params.id)
 
-  const filterContents = json.filter((v: { id: number }) => {
-    return v.id === Number(params.id)
+  const newsItems: any = await client.query({
+    query: Posts.newsItems(),
+    fetchPolicy: 'network-only',
+  })
+
+  const newsContents: any = await client.query({
+    query: Posts.newsItem(postId),
+    fetchPolicy: 'network-only',
   })
 
   return {
     props: {
-      content: filterContents[0],
-      contentList: json,
+      content: newsContents.data.newsItemBy,
+      contentList: newsItems.data.newsItems.edges,
     },
   }
 }

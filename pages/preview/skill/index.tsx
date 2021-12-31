@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import PostSkill from '@/components/PostSkill'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import axios from 'axios'
 import PageSkill from '@/components/PageSkill'
 
 const Preview = () => {
@@ -20,12 +18,12 @@ const Preview = () => {
         fetchPolicy: 'network-only',
       })
 
-      const pictureContents: any = await client.query({
+      const skillContents: any = await client.query({
         query: Posts.skillItem(Number(id)),
         fetchPolicy: 'network-only',
       })
 
-      changePost([pictureContents, skillItems])
+      changePost([skillContents, skillItems])
     }
     f()
   }, [id, nonce])

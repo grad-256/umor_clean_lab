@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import PostNews from '@/components/PostNews'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import axios from 'axios'
+import PageNews from '@/components/PageNews'
 
 const Preview = () => {
   const router = useRouter()
@@ -14,31 +14,29 @@ const Preview = () => {
   useEffect(() => {
     if (!id || !nonce) return
     const f = async () => {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}news/${id}/?_embed&status=draft`,
-        {
-          headers: {
-            // @ts-ignore
-            'X-WP-Nonce': nonce,
-          },
-        }
-      )
-      const json = await res.json()
-      console.log({ json })
+      const newsItems: any = await client.query({
+        query: Posts.newsItems(),
+        fetchPolicy: 'network-only',
+      })
 
-      const pictureContents: any = await client.query({
+      const newsContents: any = await client.query({
         query: Posts.newsItem(Number(id)),
         fetchPolicy: 'network-only',
       })
 
-      changePost(pictureContents)
+      changePost([newsContents, newsItems])
     }
     f()
   }, [id, nonce])
 
   if (typeof window === 'undefined') return null
 
-  return post ? <PostNews post={post} /> : null
+  return post ? (
+    <PageNews
+      content={post[0].data.newsItemBy}
+      contentList={post[1].data.newsItems.edges}
+    />
+  ) : null
 }
 
 export default Preview
