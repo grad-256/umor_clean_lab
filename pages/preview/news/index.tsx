@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import PostNews from '@/components/PostNews'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import PageNews from '@/components/PageNews'
+import PageDetail from '@/components/PageDetail'
 
 const Preview = () => {
   const router = useRouter()
@@ -32,7 +31,9 @@ const Preview = () => {
   if (typeof window === 'undefined') return null
 
   return post ? (
-    <PageNews
+    <PageDetail
+      title="preview"
+      URL="/hobby/news/"
       content={post[0].data.newsItemBy}
       contentList={post[1].data.newsItems.edges}
     />

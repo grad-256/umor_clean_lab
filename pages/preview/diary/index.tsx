@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import PageDiary from '@/components/PageDiary'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
+import PageDetail from '@/components/PageDetail'
 
 const Preview = () => {
   const router = useRouter()
@@ -31,9 +31,11 @@ const Preview = () => {
   if (typeof window === 'undefined') return null
 
   return post ? (
-    <PageDiary
-      content={post[0].data.skillItemBy}
-      contentList={post[1].data.skillItems.edges}
+    <PageDetail
+      title="preview"
+      URL="/hobby/diary/"
+      content={post[0].data.diaryItemBy}
+      contentList={post[1].data.diaryItems.edges}
     />
   ) : null
 }
