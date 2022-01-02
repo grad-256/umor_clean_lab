@@ -47,18 +47,18 @@ const post = {
         link
         content
         blocks {
-      ... on CoreParagraphBlock {
-        originalContent
-        attributesJSON
-        dynamicContent
-        attributes {
-          ... on CoreParagraphBlockAttributes {
-            content
+          ... on CoreParagraphBlock {
+            originalContent
+            attributesJSON
+            dynamicContent
+            attributes {
+              ... on CoreParagraphBlockAttributes {
+                content
+              }
+            }
           }
-        }
-      }
-      name
-      order
+          name
+          order
       ... on CoreTableBlock {
         attributesJSON
         dynamicContent
@@ -102,7 +102,6 @@ const post = {
     }
   }
 }
-
    `
   },
   skillItems: function () {
@@ -139,7 +138,6 @@ const post = {
       }
     `
   },
-
   newsItem: function (id: number) {
     return gql`
     query {
@@ -334,6 +332,77 @@ const post = {
               date
               content
               diaryItemId
+            }
+          }
+        }
+      }
+    `
+  },
+  pageBy: function (slug: string) {
+    return gql`
+      query {
+        pageBy(uri: "${slug}") {
+          id
+          content
+          slug
+          title
+          status
+          uri
+          blocks {
+            attributesJSON
+            dynamicContent
+            originalContent
+            ... on CoreHeadingBlock {
+              attributesJSON
+              dynamicContent
+              originalContent
+            }
+            ... on CoreParagraphBlock {
+              originalContent
+              attributesJSON
+              dynamicContent
+              attributes {
+                ... on CoreParagraphBlockAttributes {
+                  content
+                }
+              }
+            }
+            ... on CoreTableBlock {
+              attributesJSON
+              dynamicContent
+              name
+              order
+              attributes {
+                ... on CoreTableBlockAttributes {
+                  align
+                  anchor
+                  head {
+                    cells {
+                      align
+                      content
+                      scope
+                    }
+                  }
+                  foot {
+                    cells {
+                      align
+                      scope
+                    }
+                  }
+                  body {
+                    cells {
+                      align
+                      content
+                      scope
+                    }
+                  }
+                }
+              }
+            }
+          }
+          author {
+            node {
+              name
             }
           }
         }

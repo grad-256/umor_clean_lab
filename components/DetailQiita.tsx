@@ -1,11 +1,11 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
 
-const Detail = ({ title, newsContents, link }) => {
+const DetailQiita = ({ title, newsContents, link }) => {
   const { handleMoreBottom, ContentListState, MoreButtonState } =
     useContentsMore(newsContents)
 
@@ -27,7 +27,7 @@ const Detail = ({ title, newsContents, link }) => {
               return (
                 <Fragment key={i}>
                   <article className={`${styles.c_column}`}>
-                    <Link href={`/skill/qiita/${v.id}`}>
+                    <Link href={`${link}${v.id}`}>
                       <a href="" className={`${styles.c_column_body}`}>
                         <h3 className="text-2xl font-bold mt-5">{v.title}</h3>
                         <p className="text-sm">{time(v.created_at)}</p>
@@ -52,4 +52,4 @@ const Detail = ({ title, newsContents, link }) => {
   )
 }
 
-export default Detail
+export default DetailQiita

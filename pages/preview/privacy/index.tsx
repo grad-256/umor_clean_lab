@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import PageDetail from '@/components/PageDetail'
+import Layout from '@/components/Layout'
 
 const Preview = () => {
   const router = useRouter()
@@ -13,17 +13,12 @@ const Preview = () => {
   useEffect(() => {
     if (!id || !nonce) return
     const f = async () => {
-      const skillItems: any = await client.query({
-        query: Posts.skillItems(),
+      const diaryContents: any = await client.query({
+        query: Posts.pageBy('privacy'),
         fetchPolicy: 'network-only',
       })
 
-      const skillContents: any = await client.query({
-        query: Posts.skillItem(Number(id)),
-        fetchPolicy: 'network-only',
-      })
-
-      changePost([skillContents, skillItems])
+      changePost(diaryContents.data.pageBy)
     }
     f()
   }, [id, nonce])
@@ -31,12 +26,9 @@ const Preview = () => {
   if (typeof window === 'undefined') return null
 
   return post ? (
-    <PageDetail
-      title="preview"
-      URL="/hobby/diary/"
-      content={post[0].data.skillItemBy}
-      contentList={post[1].data.skillItems.edges}
-    />
+    <Layout title={`${post.title} | Hobby Blog`} type="article">
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
+    </Layout>
   ) : null
 }
 

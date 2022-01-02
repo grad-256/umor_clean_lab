@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'

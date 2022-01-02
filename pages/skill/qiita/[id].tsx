@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import { time } from '@/libs/util'
+import useContentsMore from '@/libs/useContentsMore'
 
 type CONTENTSTYPE = {
   content: {
@@ -19,31 +20,8 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
-  const [ContentShowState, setContentShowState] = useState(5)
-  const [ContentListState, setContentListState] = useState([])
-  const [MoreButtonState, setMoreButtonState] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (contentList === undefined) return
-
-    if (contentList.length >= ContentShowState) {
-      setMoreButtonState(false)
-    } else {
-      setMoreButtonState(true)
-    }
-    // eslint-disable-next-line prefer-const
-    let contentListFilter = []
-    for (let i = 0; i <= ContentShowState - 1; i++) {
-      if (contentList[i] !== undefined) {
-        contentListFilter.push(contentList[i])
-      }
-    }
-    setContentListState(contentListFilter)
-  }, [contentList, ContentShowState])
-
-  const handleMoreBottom = () => {
-    setContentShowState(ContentShowState * 2)
-  }
+  const { handleMoreBottom, ContentListState, MoreButtonState } =
+    useContentsMore(contentList)
 
   return (
     <Layout title={`${content.title} | Skill Blog`} type="article">

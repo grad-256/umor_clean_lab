@@ -4,6 +4,7 @@ import { Radar } from 'react-chartjs-2'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Adsense from '@/components/Adsense'
+import ContentMainTitle from '@/components/ContentMainTitle'
 
 const data = {
   labels: [
@@ -64,19 +65,22 @@ const datay = {
 const Index: React.FC = () => {
   return (
     <Layout title="Umor Clean Lab" type="website">
-      <h1 className={`${styles.c_pages_title}`}>UCLab</h1>
-      <section className={`${styles.c_article_main} mt-20`}>
-        <h2 className="text-4xl font-bold text-center">- Coding -</h2>
-        <div className={`${styles.c_article_hero}`}>
-          <img src="/coding.svg" alt="coding" />
-        </div>
-      </section>
+      <h1
+        className={`text-5xl font-bold text-center mt-10 mb-20 maxonlylg:mt-5`}
+      >
+        UCLab
+      </h1>
+      <ContentMainTitle title="Coding" imgname="coding" />
 
-      <div className={`${styles.c_column_detail_wrap} justify-center`}>
+      <div
+        className={`flex justify-center items-start maxonlylg:block maxonlylg:w-full`}
+      >
         <section
-          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
+          className={`bg-white rounded-[10px] w-full py-10 px-10 mr-5 maxonlylg:py-7 maxonlylg:px-3 maxonlylg:block maxonlylg:w-full maxonlylg:mx-auto c_column_detail_full`}
         >
-          <div className={`${styles.c_column_detail_title} text-center pb-6`}>
+          <div
+            className={`flex flex-col-reverse border-b-[2px] border-solid border-[#00aa6e] text-center pb-6`}
+          >
             <h2 className="text-3xl font-bold">コーディング</h2>
           </div>
           <h3 className="text-xl font-bold mt-7">PR</h3>
@@ -97,7 +101,7 @@ const Index: React.FC = () => {
             </a>
           </p>
           <h3 className="text-xl font-bold mt-10">Purpose</h3>
-          <ul className={`${styles.c_column_purpose_list}`}>
+          <ul className={`c_column_purpose_list`}>
             <li>
               IT従事者として社会に貢献し誰かの生活に影響が出ている状態を作るため
             </li>
@@ -108,7 +112,7 @@ const Index: React.FC = () => {
           </ul>
 
           <h3 className="text-xl font-bold mt-10">強み・武器</h3>
-          <ul className={`${styles.c_column_purpose_list}`}>
+          <ul className={`c_column_purpose_list`}>
             <li>UI/UX開発（API連携含む）</li>
             <li>CSSアニメーション作成</li>
             <li>
@@ -138,96 +142,99 @@ const Index: React.FC = () => {
               もご覧ください。
             </p>
           </div>
-          <dl className={`${styles.c_list_wrap}`}>
-            <div className={`${styles.c_list_contents}`}>
-              <dt>得意</dt>
-              <dd>
-                <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>JavaScript</li>
-                    <li>React.js</li>
-                    <li>Next.js</li>
-                  </ul>
-                </div>
-              </dd>
-            </div>
-            <div className={`${styles.c_list_contents}`}>
+
+          <dl className={`c_list_contents`}>
+            <dt>得意</dt>
+            <dd>
+              <div>
+                <ul>
+                  <li className="text-base">JavaScript</li>
+                  <li className="text-base">React.js</li>
+                  <li className="text-base">Next.js</li>
+                </ul>
+              </div>
+            </dd>
+          </dl>
+          <dl>
+            <div className={`c_list_contents`}>
               <dt>開発時によく使っている</dt>
               <dd>
                 <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>TypeScript</li>
-                    <li>Redux</li>
-                    <li>redux-toolkit</li>
-                    <li>tailwindcss</li>
-                    <li>StoryBook</li>
+                  <ul>
+                    <li className="text-base">TypeScript</li>
+                    <li className="text-base">Redux</li>
+                    <li className="text-base">redux-toolkit</li>
+                    <li className="text-base">tailwindcss</li>
+                    <li className="text-base">StoryBook</li>
                   </ul>
                 </div>
               </dd>
             </div>
-            <div className={`${styles.c_list_contents}`}>
+            <div className={`c_list_contents`}>
               <dt>人並みに扱える</dt>
               <dd>
                 <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>Jest</li>
-                    <li>@testing-library</li>
-                    <li>Cypress</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>SCSS</li>
+                  <ul>
+                    <li className="text-base">Jest</li>
+                    <li className="text-base">@testing-library</li>
+                    <li className="text-base">Cypress</li>
+                    <li className="text-base">HTML</li>
+                    <li className="text-base">CSS</li>
+                    <li className="text-base">SCSS</li>
                   </ul>
                 </div>
               </dd>
             </div>
-            <div className={`${styles.c_list_contents}`}>
+            <div className={`c_list_contents`}>
               <dt>開発環境に使用している</dt>
               <dd>
                 <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>webpack</li>
-                    <li>Github</li>
+                  <ul>
+                    <li className="text-base">webpack</li>
+                    <li className="text-base">Github</li>
                   </ul>
                 </div>
               </dd>
             </div>
-            <div className={`${styles.c_list_contents}`}>
+            <div className={`c_list_contents`}>
               <dt>件数は少ないが案件で開発を行なった</dt>
               <dd>
                 <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>PHP</li>
-                    <li>MySQL</li>
-                    <li>Laravel</li>
+                  <ul>
+                    <li className="text-base">PHP</li>
+                    <li className="text-base">MySQL</li>
+                    <li className="text-base">Laravel</li>
                   </ul>
                 </div>
               </dd>
             </div>
-            <div className={`${styles.c_list_contents}`}>
+            <div className={`c_list_contents`}>
               <dt>触ったことがある</dt>
               <dd>
                 <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>Python</li>
+                  <ul>
+                    <li className="text-base">Python</li>
                   </ul>
                 </div>
               </dd>
             </div>
-            <div className={`${styles.c_list_contents}`}>
+            <div className={`c_list_contents`}>
               <dt>興味があり学習していること</dt>
               <dd>
                 <div>
-                  <ul className={`${styles.c_list}`}>
-                    <li>React Native</li>
-                    <li>アーキテクチャ設計</li>
-                    <li>AWS Amplify</li>
+                  <ul>
+                    <li className="text-base">React Native</li>
+                    <li className="text-base">アーキテクチャ設計</li>
+                    <li className="text-base">AWS Amplify</li>
                   </ul>
                 </div>
               </dd>
             </div>
           </dl>
-          <div className={`${styles.c_area_rader_wrap}`}>
-            <div className={`${styles.c_area_radar}`}>
+          <div className="flex flex-wrap c_area_rader_wrap">
+            <div
+              className={`pb-5 mt-10 border-b-[1px] border-solid border-[#00aa6e] odd:mr-[2rem] maxonlylg:odd:mr-0`}
+            >
               <Radar
                 data={data}
                 options={{
@@ -265,7 +272,9 @@ const Index: React.FC = () => {
                 }}
               />
             </div>
-            <div className={`${styles.c_area_radar}`}>
+            <div
+              className={`pb-5 mt-10 border-b-[1px] border-solid border-[#00aa6e] odd:mr-[2rem] maxonlylg:odd:mr-0`}
+            >
               <Radar
                 data={datag}
                 options={{
@@ -303,7 +312,9 @@ const Index: React.FC = () => {
                 }}
               />
             </div>
-            <div className={`${styles.c_area_radar}`}>
+            <div
+              className={`pb-5 mt-10 border-b-[1px] border-solid border-[#00aa6e] odd:mr-[2rem] maxonlylg:odd:mr-0`}
+            >
               <Radar
                 data={datay}
                 options={{

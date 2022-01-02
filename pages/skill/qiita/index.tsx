@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { GetStaticProps } from 'next'
 import DetailQiita from '@/components/DetailQiita'
 

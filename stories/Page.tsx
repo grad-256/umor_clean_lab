@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Header } from './Header'
-import './page.css'
 
 type PageProps = {
   // eslint-disable-next-line @typescript-eslint/ban-types

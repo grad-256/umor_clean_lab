@@ -4,6 +4,13 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    screens: {
+      lg: '1024px',
+      maxlg: { max: '1200px', min: '1199px' },
+      // => @media (min-width: 1024px) { ... }
+      onlylg: '1199px',
+      maxonlylg: { max: '1200px' },
+    },
     borderColor: (theme) => ({
       default: theme('colors.gray.300', 'currentColor'),
       primary: '#35478C',

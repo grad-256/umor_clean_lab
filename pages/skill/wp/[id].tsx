@@ -20,8 +20,6 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
-  console.log({ contentList })
-
   return <PageSkill content={content} contentList={contentList} />
 }
 

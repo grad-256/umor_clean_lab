@@ -5,18 +5,20 @@ import Layout from '@/components/Layout'
 const About: React.FC = () => {
   return (
     <Layout title="このサイトについて | Hobby Blog" type="article">
-      <section className={`${styles.c_article_main}`}>
+      <section className={`c_article_main`}>
         <h1 className="text-4xl font-bold text-center">- About -</h1>
-        <div className={`${styles.c_article_hero}`}>
+        <div className={`c_article_hero`}>
           <img src="/about.svg" alt="about" />
         </div>
       </section>
 
-      <div className={`${styles.c_column_detail_wrap} justify-center`}>
-        <section
-          className={`${styles.c_column_detail} ${styles.c_column_detail_full}`}
-        >
-          <div className={`${styles.c_column_detail_title} text-center pb-6`}>
+      <div
+        className={`flex mx-auto items-start justify-center maxonlylg:w-full maxonlylg:block`}
+      >
+        <section className={`c_column_detail c_column_detail_full`}>
+          <div
+            className={`flex flex-col-reverse border-b-[2px] border-solid border-color-[#00aa6e] text-center pb-6`}
+          >
             <h2 className="text-3xl font-bold">このサイトについて</h2>
           </div>
           <p className="text-base mt-7">
