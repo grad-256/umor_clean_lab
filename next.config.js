@@ -39,12 +39,9 @@ module.exports = {
   ) {
     return {
       '/': { page: '/' },
-      '/privacy': { page: '/privacy' },
       '/pictures': { page: '/pictures' },
       '/covid': { page: '/covid' },
-      '/about': { page: '/about' },
       '/inquiry': { page: '/inquiry' },
-      '/profile': { page: '/profile' },
       '/preview/news': { page: '/preview/news' },
       '/preview/skill': { page: '/preview/skill' },
       '/preview/diary': { page: '/preview/diary' },
