@@ -7,6 +7,7 @@ import Layout from '@/components/Layout'
 export const PAGES = [
   { url: 'about', title: 'このサイトについて' },
   { url: 'privacy', title: 'プライバシーポリシー' },
+  { url: 'profile', title: 'プロフィール' },
 ]
 
 const PagePost = ({ content }) => {
