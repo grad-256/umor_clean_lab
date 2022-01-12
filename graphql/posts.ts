@@ -204,7 +204,7 @@ const post = {
     }
    `
   },
-  newsItems: function (count: number) {
+  newsItems: function () {
     return gql`
       query {
         newsItems(first: 5) {

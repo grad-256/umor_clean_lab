@@ -40,7 +40,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const result = await Fetch.json()
 
   const data: any = await client.query({
-    query: Posts.newsItems(result.length),
+    query: Posts.newsItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 
