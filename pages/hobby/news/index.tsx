@@ -23,8 +23,11 @@ const Hobby: React.FC<CONTENTSTYPE> = ({ newsContents }) => {
 export default Hobby
 
 export const getStaticProps: GetStaticProps = async () => {
+  const Fetch = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news/`)
+  const result = await Fetch.json()
+
   const dataNews: any = await client.query({
-    query: Posts.newsItemsAll(),
+    query: Posts.newsItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 

@@ -5,6 +5,7 @@ import Posts from '@/graphql/posts'
 import PageDetail from '@/components/PageDetail'
 
 type CONTENTSTYPE = {
+  postId: number
   content: {
     title: string
     date: string
@@ -19,9 +20,11 @@ type CONTENTSTYPE = {
   }[]
 }
 
-const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
+const Content: React.FC<CONTENTSTYPE> = ({ postId, content, contentList }) => {
   return (
     <PageDetail
+      pagename="news"
+      postId={postId}
       title="News"
       URL="/hobby/news/"
       content={content}
@@ -33,8 +36,11 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
 export default Content
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const Fetch = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news/`)
+  const result = await Fetch.json()
+
   const data: any = await client.query({
-    query: Posts.newsItems(),
+    query: Posts.newsItems(result.length),
     fetchPolicy: 'network-only',
   })
 
@@ -53,9 +59,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postId = Number(params.id)
+  const Fetch = await fetch(`${process.env.NEXT_PUBLIC_API_URL}news/`)
+  const result = await Fetch.json()
 
   const newsItems: any = await client.query({
-    query: Posts.newsItemsAll(),
+    query: Posts.newsItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 
@@ -66,6 +74,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
+      postId,
       content: newsContents.data.newsItemBy,
       contentList: newsItems.data.newsItems.edges,
     },

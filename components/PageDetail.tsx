@@ -4,10 +4,12 @@ import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
+import { usePagenation } from '@/libs/usePagenation'
 
-const PageDiary = ({ title, URL, content, contentList }) => {
+const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
   const { handleMoreBottom, ContentListState, MoreButtonState } =
     useContentsMore(contentList)
+  const { PageNumberState } = usePagenation({ pagename, postId, contentList })
 
   return (
     <Layout title={`${content.title} | ${title}`} type="article">
@@ -27,6 +29,28 @@ const PageDiary = ({ title, URL, content, contentList }) => {
             className={`${styles.c_contents}`}
             dangerouslySetInnerHTML={{ __html: content.content }}
           />
+          <div className="flex justify-between mt-10">
+            {PageNumberState.prev !== undefined && (
+              <a
+                href={`${URL}${PageNumberState.prev}`}
+                className="mr-auto ml-0 text-lg base_button w-[5rem]"
+              >
+                <div className="flex items-center justify-center">
+                  <span>PREV</span>
+                </div>
+              </a>
+            )}
+            {PageNumberState.next !== undefined && (
+              <a
+                href={`${URL}${PageNumberState.next}`}
+                className="mr-0 ml-auto text-lg base_button w-[5rem]"
+              >
+                <div className="flex items-center justify-center">
+                  <span>NEXT</span>
+                </div>
+              </a>
+            )}
+          </div>
         </article>
         <div className={`${styles.c_column_recommend_content}`}>
           <p

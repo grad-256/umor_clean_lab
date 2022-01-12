@@ -204,7 +204,7 @@ const post = {
     }
    `
   },
-  newsItems: function () {
+  newsItems: function (count: number) {
     return gql`
       query {
         newsItems(first: 5) {
@@ -221,10 +221,10 @@ const post = {
       }
     `
   },
-  newsItemsAll: function () {
+  newsItemsAll: function (count: number) {
     return gql`
       query {
-        newsItems {
+        newsItems(first: ${count}) {
           edges {
             node {
               id
@@ -321,10 +321,10 @@ const post = {
       }
     `
   },
-  diaryItemsAll: function () {
+  diaryItemsAll: function (count: number) {
     return gql`
       query {
-        diaryItems {
+        diaryItems(first: ${count}) {
           edges {
             node {
               id
