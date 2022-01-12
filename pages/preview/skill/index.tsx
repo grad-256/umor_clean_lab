@@ -32,8 +32,10 @@ const Preview = () => {
 
   return post ? (
     <PageDetail
+      pagename="skill"
+      postId={id}
       title="preview"
-      URL="/hobby/diary/"
+      URL="/skill/wp/"
       content={post[0].data.skillItemBy}
       contentList={post[1].data.skillItems.edges}
     />

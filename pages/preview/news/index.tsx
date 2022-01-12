@@ -32,6 +32,8 @@ const Preview = () => {
 
   return post ? (
     <PageDetail
+      pagename="news"
+      postId={id}
       title="preview"
       URL="/hobby/news/"
       content={post[0].data.newsItemBy}
