@@ -6,12 +6,13 @@ import Posts from '@/graphql/posts'
 import { ParsedUrlQuery } from 'node:querystring'
 
 type CONTENTSTYPE = {
+  postId: number
   pictureListContents: {
     title: string
     content: string
     date: string
   }
-  pictureList: {
+  contentList: {
     node: {
       postId: number
       title: string
@@ -21,13 +22,18 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({
+  postId,
   pictureListContents,
-  pictureList,
+  contentList,
 }) => {
   return (
     <PagePictures
+      pagename="picture"
+      postId={postId}
+      title="Picture"
+      URL="/pictures/"
       pictureListContents={pictureListContents}
-      pictureList={pictureList}
+      contentList={contentList}
     />
   )
 }
@@ -64,12 +70,17 @@ interface Params extends ParsedUrlQuery {
 
 interface Props {
   pictureListContents: pictureListContentsTYPE
-  pictureList: pictureListTYPE
+  contentList: pictureListTYPE
 }
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const Fetch = await fetch(
+    `${process.env.NEXT_PUBLIC_POSTS_API_URL}?_fields=id`
+  )
+  const result = await Fetch.json()
+
   const data: any = await client.query({
-    query: Posts.getItems(),
+    query: Posts.getItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 
@@ -91,9 +102,13 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
   const postId = params.id
+  const Fetch = await fetch(
+    `${process.env.NEXT_PUBLIC_POSTS_API_URL}?_fields=id`
+  )
+  const result = await Fetch.json()
 
-  const pictureList: any = await client.query({
-    query: Posts.getItems(),
+  const contentList: any = await client.query({
+    query: Posts.getItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
   const pictureContents: any = await client.query({
@@ -103,8 +118,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
   return {
     props: {
+      postId,
       pictureListContents: pictureContents.data.postBy,
-      pictureList: pictureList.data.posts.edges,
+      contentList: contentList.data.posts.edges,
     },
   }
 }

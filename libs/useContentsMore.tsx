@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const useContentsMore = (contentList) => {
+const useContentsMore = (contentList: string | any[]) => {
   const [ContentShowState, setContentShowState] = useState(5)
   const [ContentListState, setContentListState] = useState([])
   const [MoreButtonState, setMoreButtonState] = useState<boolean>(false)
@@ -23,11 +23,30 @@ const useContentsMore = (contentList) => {
     setContentListState(contentListFilter)
   }, [contentList, ContentShowState])
 
-  const handleMoreBottom = () => {
-    setContentShowState(ContentShowState * 2)
+  const MoreButton = () => {
+    return (
+      <>
+        {!MoreButtonState ? (
+          <button
+            onClick={() => handleMoreBottom()}
+            type="button"
+            disabled={MoreButtonState}
+            className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
+          >
+            もっと見る
+          </button>
+        ) : (
+          ''
+        )}
+      </>
+    )
   }
 
-  return { handleMoreBottom, ContentListState, MoreButtonState }
+  const handleMoreBottom = () => {
+    setContentShowState(ContentShowState + 5)
+  }
+
+  return { handleMoreBottom, ContentListState, MoreButtonState, MoreButton }
 }
 
 export default useContentsMore

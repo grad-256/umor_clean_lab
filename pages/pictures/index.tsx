@@ -67,8 +67,13 @@ const Pictures: React.FC<PicturesTYPE> = ({ pictureListContents }) => {
 export default Pictures
 
 export const getStaticProps: GetStaticProps = async () => {
+  const Fetch = await fetch(
+    `${process.env.NEXT_PUBLIC_POSTS_API_URL}?_fields=id`
+  )
+  const result = await Fetch.json()
+
   const data: any = await client.query({
-    query: Posts.getItems(),
+    query: Posts.getItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 

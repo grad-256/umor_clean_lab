@@ -7,16 +7,20 @@ import { time } from '@/libs/util'
 import { usePagenation } from '@/libs/usePagenation'
 
 const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
-  const { handleMoreBottom, ContentListState, MoreButtonState } =
-    useContentsMore(contentList)
-  const { PageNumberState } = usePagenation({ pagename, postId, contentList })
+  const { ContentListState, MoreButton } = useContentsMore(contentList)
+  const { PageNationComponent } = usePagenation({
+    pagename,
+    postId,
+    URL,
+    contentList,
+  })
 
   return (
     <Layout title={`${content.title} | ${title}`} type="article">
       <div className={`${styles.c_article_main}`}>
         <p className="text-4xl font-bold text-center">- {`${title}`}-</p>
         <div className={`${styles.c_article_hero}`}>
-          <img src="/blog.svg" alt="blog" />
+          <img src={`/${pagename}.svg`} alt={`${pagename}`} />
         </div>
       </div>
       <div className={`${styles.c_column_detail_wrap}`}>
@@ -29,28 +33,7 @@ const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
             className={`${styles.c_contents}`}
             dangerouslySetInnerHTML={{ __html: content.content }}
           />
-          <div className="flex justify-between mt-10">
-            {PageNumberState.prev !== undefined && (
-              <a
-                href={`${URL}${PageNumberState.prev}`}
-                className="mr-auto ml-0 text-lg base_button w-[5rem]"
-              >
-                <div className="flex items-center justify-center">
-                  <span>PREV</span>
-                </div>
-              </a>
-            )}
-            {PageNumberState.next !== undefined && (
-              <a
-                href={`${URL}${PageNumberState.next}`}
-                className="mr-0 ml-auto text-lg base_button w-[5rem]"
-              >
-                <div className="flex items-center justify-center">
-                  <span>NEXT</span>
-                </div>
-              </a>
-            )}
-          </div>
+          <PageNationComponent />
         </article>
         <div className={`${styles.c_column_recommend_content}`}>
           <p
@@ -78,14 +61,7 @@ const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
                   </Fragment>
                 )
               })}
-            <button
-              onClick={() => handleMoreBottom()}
-              type="button"
-              disabled={MoreButtonState}
-              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
-            >
-              もっと見る
-            </button>
+            <MoreButton />
           </div>
         </div>
       </div>

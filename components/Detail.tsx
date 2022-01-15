@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
@@ -6,8 +6,7 @@ import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
 
 const Detail = ({ title, newsContents, link }) => {
-  const { handleMoreBottom, ContentListState, MoreButtonState } =
-    useContentsMore(newsContents)
+  const { ContentListState, MoreButton } = useContentsMore(newsContents)
 
   return (
     <Layout title={title} type="article">
@@ -40,14 +39,7 @@ const Detail = ({ title, newsContents, link }) => {
               )
             })}
 
-          <button
-            onClick={() => handleMoreBottom()}
-            type="button"
-            disabled={MoreButtonState}
-            className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
-          >
-            もっと見る
-          </button>
+          <MoreButton />
         </section>
       </div>
     </Layout>

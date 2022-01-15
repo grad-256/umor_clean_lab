@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -19,8 +19,14 @@ const Layout = ({ title, type, children }) => {
 
   useEffect(() => {
     const LinkComp = document.querySelectorAll('.LinkComp')
-    for (let i = 0; i < LinkComp.length; i++) {
-      if (LinkComp[i].getAttribute('href') === router.asPath) {
+    const LinkName = router.asPath.split('/').filter(Boolean)[0]
+
+    for (let i = 0; i <= LinkComp.length - 1; i++) {
+      if (LinkName === undefined) {
+        LinkComp[i].classList.add('active')
+        return
+      }
+      if (LinkComp[i].getAttribute('href').indexOf(LinkName) > -1) {
         LinkComp[i].classList.add('active')
       }
     }

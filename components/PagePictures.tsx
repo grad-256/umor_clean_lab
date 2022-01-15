@@ -1,14 +1,31 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
+import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
+import { usePagenation } from '@/libs/usePagenation'
 
-const PagePictures = ({ pictureListContents, pictureList }) => {
+const PagePictures = ({
+  pagename,
+  postId,
+  title,
+  URL,
+  pictureListContents,
+  contentList,
+}) => {
+  const { ContentListState, MoreButton } = useContentsMore(contentList)
+  const { PageNationComponent } = usePagenation({
+    pagename,
+    postId,
+    URL,
+    contentList,
+  })
+
   return (
-    <Layout title={`${pictureListContents.title} | Pictures`} type="article">
+    <Layout title={`${pictureListContents.title} | ${title}`} type="article">
       <div className={`${styles.c_article_main}`}>
-        <p className="text-4xl font-bold text-center">- Pictures -</p>
+        <p className="text-4xl font-bold text-center">- {title} -</p>
         <div className={`${styles.c_article_hero}`}>
           <img src="/diary.svg" alt="diary" />
         </div>
@@ -25,6 +42,7 @@ const PagePictures = ({ pictureListContents, pictureList }) => {
             className={`${styles.c_contents}`}
             dangerouslySetInnerHTML={{ __html: pictureListContents.content }}
           />
+          <PageNationComponent />
         </article>
         <div className={`${styles.c_column_recommend_content}`}>
           <p
@@ -33,14 +51,14 @@ const PagePictures = ({ pictureListContents, pictureList }) => {
             - Recommend -
           </p>
           <div className={`${styles.c_column_recommend_wrap}`}>
-            {pictureList &&
-              pictureList.map((v, i) => {
+            {ContentListState &&
+              ContentListState.map((v, i) => {
                 return (
                   <Fragment key={i}>
                     <section
                       className={`${styles.c_column} ${styles.c_column_recommend}`}
                     >
-                      <Link href={`/pictures/${v.node.postId}`}>
+                      <Link href={`${URL}${v.node.postId}`}>
                         <a href="" className="py-5 px-5 flex flex-col-reverse">
                           <h3 className="text-xl font-bold mt-5">
                             {v.node.title}
@@ -52,6 +70,7 @@ const PagePictures = ({ pictureListContents, pictureList }) => {
                   </Fragment>
                 )
               })}
+            <MoreButton />
           </div>
         </div>
       </div>

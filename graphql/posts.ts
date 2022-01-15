@@ -16,7 +16,32 @@ const post = {
   getItems: function () {
     return gql`
       query {
-        posts {
+        posts(first: 5) {
+          edges {
+            node {
+              id
+              title
+              excerpt
+              date
+              postId
+              slug
+              featuredImage {
+                node {
+                  uri
+                  slug
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+  },
+  getItemsAll: function (count: number) {
+    return gql`
+      query {
+        posts(first: ${count}) {
           edges {
             node {
               id
@@ -121,10 +146,10 @@ const post = {
       }
     `
   },
-  skillItemsAll: function () {
+  skillItemsAll: function (count: number) {
     return gql`
       query {
-        skillItems {
+        skillItems(first: ${count}) {
           edges {
             node {
               id

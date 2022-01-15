@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import styles from '@/styles/Home.module.scss'
@@ -20,15 +20,14 @@ type CONTENTSTYPE = {
 }
 
 const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
-  const { handleMoreBottom, ContentListState, MoreButtonState } =
-    useContentsMore(contentList)
+  const { ContentListState, MoreButton } = useContentsMore(contentList)
 
   return (
     <Layout title={`${content.title} | Skill Blog`} type="article">
       <div className={`${styles.c_article_main}`}>
         <p className="text-4xl font-bold text-center">- Skill -</p>
         <div className={`${styles.c_article_hero}`}>
-          <img src="/news.svg" alt="news" />
+          <img src="/skill.svg" alt="skill" />
         </div>
       </div>
       <div className={`${styles.c_column_detail_wrap}`}>
@@ -66,14 +65,7 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
                   </Fragment>
                 )
               })}
-            <button
-              onClick={() => handleMoreBottom()}
-              type="button"
-              disabled={MoreButtonState}
-              className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
-            >
-              もっと見る
-            </button>
+            <MoreButton />
           </div>
         </div>
       </div>

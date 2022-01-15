@@ -1,10 +1,11 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import PageSkill from '@/components/PageSkill'
+import PageDetail from '@/components/PageDetail'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
 
 type CONTENTSTYPE = {
+  postId: number
   content: {
     title: string
     date: string
@@ -19,15 +20,27 @@ type CONTENTSTYPE = {
   }[]
 }
 
-const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
-  return <PageSkill content={content} contentList={contentList} />
+const Content: React.FC<CONTENTSTYPE> = ({ postId, content, contentList }) => {
+  return (
+    <PageDetail
+      pagename="skill"
+      postId={postId}
+      title="Skill"
+      URL="/skill/wp/"
+      content={content}
+      contentList={contentList}
+    />
+  )
 }
 
 export default Content
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const Fetch = await fetch(`${process.env.NEXT_PUBLIC_API_URL}skill/`)
+  const result = await Fetch.json()
+
   const data: any = await client.query({
-    query: Posts.skillItems(),
+    query: Posts.skillItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 
@@ -46,9 +59,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postId = Number(params.id)
+  const Fetch = await fetch(`${process.env.NEXT_PUBLIC_API_URL}skill/`)
+  const result = await Fetch.json()
 
   const skillItems: any = await client.query({
-    query: Posts.skillItemsAll(),
+    query: Posts.skillItemsAll(result.length),
     fetchPolicy: 'network-only',
   })
 
@@ -59,6 +74,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
+      postId,
       content: skillContents.data.skillItemBy,
       contentList: skillItems.data.skillItems.edges,
     },
