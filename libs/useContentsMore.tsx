@@ -26,18 +26,14 @@ const useContentsMore = (contentList: string | any[]) => {
   const MoreButton = () => {
     return (
       <>
-        {!MoreButtonState ? (
-          <button
-            onClick={() => handleMoreBottom()}
-            type="button"
-            disabled={MoreButtonState}
-            className="mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
-          >
-            もっと見る
-          </button>
-        ) : (
-          ''
-        )}
+        <button
+          onClick={() => handleMoreBottom()}
+          type="button"
+          disabled={MoreButtonState}
+          className="disabled:opacity-30 mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
+        >
+          もっと見る
+        </button>
       </>
     )
   }

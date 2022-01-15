@@ -65,7 +65,7 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
                   </Fragment>
                 )
               })}
-            <MoreButton />
+            {/* <MoreButton /> */}
           </div>
         </div>
       </div>

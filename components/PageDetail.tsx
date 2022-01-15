@@ -6,8 +6,9 @@ import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
 import { usePagenation } from '@/libs/usePagenation'
 
-const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
-  const { ContentListState, MoreButton } = useContentsMore(contentList)
+const PageDetail = ({ pagename, postId, title, URL, content, contentList }) => {
+  const { handleMoreBottom, MoreButtonState, ContentListState } =
+    useContentsMore(contentList)
   const { PageNationComponent } = usePagenation({
     pagename,
     postId,
@@ -61,7 +62,14 @@ const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
                   </Fragment>
                 )
               })}
-            <MoreButton />
+            <button
+              onClick={() => handleMoreBottom()}
+              type="button"
+              disabled={MoreButtonState}
+              className="disabled:opacity-30 mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
+            >
+              もっと見る
+            </button>
           </div>
         </div>
       </div>
@@ -69,4 +77,4 @@ const PageDiary = ({ pagename, postId, title, URL, content, contentList }) => {
   )
 }
 
-export default PageDiary
+export default PageDetail
