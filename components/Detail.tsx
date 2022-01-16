@@ -5,8 +5,7 @@ import useContentsMore from '@/libs/useContentsMore'
 import { time } from '@/libs/util'
 
 const Detail = ({ title, newsContents, link }) => {
-  const { handleMoreBottom, MoreButtonState, ContentListState } =
-    useContentsMore(newsContents)
+  const { ContentListState, MoreButton } = useContentsMore(newsContents)
 
   return (
     <Layout title={title} type="article">
@@ -39,15 +38,7 @@ const Detail = ({ title, newsContents, link }) => {
                 </Fragment>
               )
             })}
-
-          <button
-            onClick={() => handleMoreBottom()}
-            type="button"
-            disabled={MoreButtonState}
-            className="disabled:opacity-30 mt-10 text-base rounded-full text-[#35478C] border-2 border-primary border-solid text-center block font-bold maxtb:text-sm py-2 px-4 w-full"
-          >
-            もっと見る
-          </button>
+          <MoreButton />
         </section>
       </div>
     </Layout>
