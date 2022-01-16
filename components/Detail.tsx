@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import Link from 'next/link'
 import styles from '@/styles/Home.module.scss'
 import Layout from '@/components/Layout'
 import useContentsMore from '@/libs/useContentsMore'
@@ -27,14 +26,15 @@ const Detail = ({ title, newsContents, link }) => {
               return (
                 <Fragment key={i}>
                   <article className={`${styles.c_column}`}>
-                    <Link href={`${link}${v.node[Object.keys(v.node)['5']]}`}>
-                      <a href="" className={`${styles.c_column_body}`}>
-                        <h3 className="text-2xl font-bold mt-5">
-                          {v.node.title}
-                        </h3>
-                        <p className="text-sm">{time(v.node.date)}</p>
-                      </a>
-                    </Link>
+                    <a
+                      href={`${link}${v.node[Object.keys(v.node)['5']]}`}
+                      className={`${styles.c_column_body}`}
+                    >
+                      <h3 className="text-2xl font-bold mt-5">
+                        {v.node.title}
+                      </h3>
+                      <p className="text-sm">{time(v.node.date)}</p>
+                    </a>
                   </article>
                 </Fragment>
               )
