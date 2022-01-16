@@ -22,6 +22,8 @@ const Layout = ({ title, type, children }) => {
     const LinkName = router.asPath.split('/').filter(Boolean)[0]
 
     for (let i = 0; i <= LinkComp.length - 1; i++) {
+      LinkComp[i].classList.remove('active')
+
       if (LinkName === undefined) {
         LinkComp[i].classList.add('active')
         return
