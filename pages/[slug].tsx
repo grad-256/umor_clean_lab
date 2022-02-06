@@ -5,6 +5,7 @@ import Posts from '@/graphql/posts'
 import Layout from '@/components/Layout'
 
 export const PAGES = [
+  { url: 'top', title: 'このサイトについて' },
   { url: 'about', title: 'このサイトについて' },
   { url: 'privacy', title: 'プライバシーポリシー' },
   { url: 'profile', title: 'プロフィール' },

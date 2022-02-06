@@ -1,24 +1,33 @@
 import React, { useEffect, useState } from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
 import Layout from '@/components/Layout'
 
-const Preview = () => {
+export const PAGES = [
+  { url: 'top', title: 'TOP' },
+  { url: 'about', title: 'このサイトについて' },
+  { url: 'privacy', title: 'プライバシーポリシー' },
+  { url: 'profile', title: 'プロフィール' },
+]
+
+const Preview = ({ posturi }) => {
   const router = useRouter()
   const [post, changePost] = useState(null)
   const { id, nonce, slug } = router.query
 
   // ?_embed&status=draft
   useEffect(() => {
-    if (!id || !nonce) return
+    if (!id || !nonce || !slug) return
+
     const f = async () => {
-      const diaryContents: any = await client.query({
-        query: Posts.pageBy(`${slug}`),
+      const Contents: any = await client.query({
+        query: Posts.pageBy(`${posturi}`),
         fetchPolicy: 'network-only',
       })
 
-      changePost(diaryContents.data.pageBy)
+      changePost(Contents.data.pageBy)
     }
     f()
   }, [id, nonce, slug])
@@ -33,3 +42,26 @@ const Preview = () => {
 }
 
 export default Preview
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: PAGES.map((page) => `/${page.url}`) || [],
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const posturi = String(params.slug)
+
+  const pageContents: any = await client.query({
+    query: Posts.pageBy(posturi),
+    fetchPolicy: 'network-only',
+  })
+
+  return {
+    props: {
+      posturi,
+      content: pageContents.data.pageBy,
+    },
+  }
+}
