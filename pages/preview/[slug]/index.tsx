@@ -6,7 +6,6 @@ import Posts from '@/graphql/posts'
 import Layout from '@/components/Layout'
 
 export const PAGES = [
-  { url: 'top', title: 'TOP' },
   { url: 'about', title: 'このサイトについて' },
   { url: 'privacy', title: 'プライバシーポリシー' },
   { url: 'profile', title: 'プロフィール' },
@@ -45,7 +44,7 @@ export default Preview
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: PAGES.map((page) => `/${page.url}`) || [],
+    paths: PAGES.map((page) => `/preview/${page.url}`) || [],
     fallback: false,
   }
 }
