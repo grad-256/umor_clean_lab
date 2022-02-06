@@ -39,16 +39,11 @@ module.exports = {
   ) {
     return {
       '/': { page: '/' },
-      '/pictures': { page: '/pictures' },
       '/covid': { page: '/covid' },
       '/inquiry': { page: '/inquiry' },
-      '/preview/top': { page: '/preview/top' },
-      '/preview/about': { page: '/preview/about' },
-      '/preview/profile': { page: '/preview/profile' },
       '/preview/news': { page: '/preview/news' },
       '/preview/skill': { page: '/preview/skill' },
       '/preview/diary': { page: '/preview/diary' },
-      '/preview/privacy': { page: '/preview/privacy' },
     }
   },
 }
