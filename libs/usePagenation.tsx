@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-
-// type PageNewsNumberType = {
-//   prev: string | undefined
-//   next: string | undefined
-// }
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+type PageNewsNumberType = {
+  prev: string | undefined
+  next: string | undefined
+}
 
 export const usePagenation = ({ pagename, postId, URL, contentList }) => {
-  const [PageNumberState, setPageNumberState] = useState({
+  const router = useRouter()
+  const [PageNumberState, setPageNumberState] = useState<PageNewsNumberType>({
     prev: undefined,
     next: undefined,
   })
@@ -43,24 +45,22 @@ export const usePagenation = ({ pagename, postId, URL, contentList }) => {
     return (
       <div className="flex justify-between mt-10">
         {PageNumberState.prev !== undefined && (
-          <a
-            href={`${URL}${PageNumberState.prev}`}
-            className="mr-auto ml-0 text-lg base_button w-[5rem]"
-          >
-            <div className="flex items-center justify-center">
-              <span>PREV</span>
-            </div>
-          </a>
+          <Link href={`${URL}${PageNumberState.prev}`}>
+            <a className="mr-auto ml-0 text-lg base_button w-[5rem]">
+              <div className="flex items-center justify-center">
+                <span>PREV</span>
+              </div>
+            </a>
+          </Link>
         )}
         {PageNumberState.next !== undefined && (
-          <a
-            href={`${URL}${PageNumberState.next}`}
-            className="mr-0 ml-auto text-lg base_button w-[5rem]"
-          >
-            <div className="flex items-center justify-center">
-              <span>NEXT</span>
-            </div>
-          </a>
+          <Link href={`${URL}${PageNumberState.next}`}>
+            <a className="mr-0 ml-auto text-lg base_button w-[5rem]">
+              <div className="flex items-center justify-center">
+                <span>NEXT</span>
+              </div>
+            </a>
+          </Link>
         )}
       </div>
     )
@@ -68,7 +68,7 @@ export const usePagenation = ({ pagename, postId, URL, contentList }) => {
 
   useEffect(() => {
     PageNation()
-  }, [])
+  }, [router])
 
   return { PageNumberState, PageNationComponent }
 }

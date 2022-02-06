@@ -7,21 +7,21 @@ import Layout from '@/components/Layout'
 const Preview = () => {
   const router = useRouter()
   const [post, changePost] = useState(null)
-  const { id, nonce } = router.query
+  const { id, nonce, slug } = router.query
 
   // ?_embed&status=draft
   useEffect(() => {
     if (!id || !nonce) return
     const f = async () => {
       const diaryContents: any = await client.query({
-        query: Posts.pageBy('profile'),
+        query: Posts.pageBy(`${slug}`),
         fetchPolicy: 'network-only',
       })
 
       changePost(diaryContents.data.pageBy)
     }
     f()
-  }, [id, nonce])
+  }, [id, nonce, slug])
 
   if (typeof window === 'undefined') return null
 

@@ -3,7 +3,6 @@ import { GetStaticProps } from 'next'
 import Layout from '@/components/Layout'
 import client from '@/apollo-client'
 import Posts from '@/graphql/posts'
-import ProfileChartjs from '@/components/ProfileChartjs'
 
 const Index = ({ content }) => {
   return (
@@ -14,7 +13,6 @@ const Index = ({ content }) => {
         UCLab
       </h1>
       <div dangerouslySetInnerHTML={{ __html: content.content }} />
-      <ProfileChartjs />
     </Layout>
   )
 }

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React from 'react'
 import { GetStaticProps, GetStaticPaths } from 'next'
 import PagePictures from '@/components/PagePictures'
 import client from '@/apollo-client'
