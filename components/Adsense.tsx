@@ -6,6 +6,16 @@ const Adsense = () => {
   const { asPath } = useRouter()
 
   useEffect(() => {
+    const wrapper = document.querySelector('.c-wrapper') as any
+    const observer = new MutationObserver(function (mutations, observer) {
+      wrapper.style.height = ''
+    })
+
+    observer.observe(wrapper, {
+      attributes: true,
+      attributeFilter: ['style'],
+    })
+
     try {
       //@ts-ignore
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})

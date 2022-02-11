@@ -69,7 +69,6 @@ const Content: React.FC<CONTENTSTYPE> = ({ content, contentList }) => {
           </div>
         </div>
       </div>
-      {/* <Adsense /> */}
     </Layout>
   )
 }
