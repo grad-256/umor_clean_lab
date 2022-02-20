@@ -4,6 +4,8 @@ import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { store } from '@/app/store'
 import { Provider as ReduxProvider } from 'react-redux'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import useBuildId from '@/libs/useBuildId'
 import usePageView from '@/components/usePageView'
 import 'tailwindcss/tailwind.css'
@@ -14,6 +16,16 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 NProgress.configure({ showSpinner: false, speed: 400, minimum: 0.25 })
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+      staleTime: 300000,
+    },
+  },
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -84,9 +96,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           rel="stylesheet"
         />
       </Head>
-      <ReduxProvider store={store}>
-        <Component {...pageProps} />
-      </ReduxProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReduxProvider store={store}>
+          <Component {...pageProps} />
+        </ReduxProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   )
 }
