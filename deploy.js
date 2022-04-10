@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+// デプロイ時にtaimeスタンプを作る
 var fs = require('fs')
 const date = new Date()
 const Y = date.getFullYear()
