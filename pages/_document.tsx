@@ -17,9 +17,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <script
-            data-ad-client={adsenseId}
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
           />
           {/* Google Analytics */}
           {existsGaId && (

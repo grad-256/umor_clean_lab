@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
+import Adsense from '@/components/Adsense'
 
 const Layout = ({ title, type, children }) => {
   const router = useRouter()
@@ -241,6 +242,7 @@ const Layout = ({ title, type, children }) => {
         <p className="text-center px-6 text-xs mt-10 text-gray-100">
           &copy; UCLab inc.
         </p>
+        <Adsense />
       </div>
 
       <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
